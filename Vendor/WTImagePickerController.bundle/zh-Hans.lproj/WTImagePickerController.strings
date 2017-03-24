@@ -1,0 +1,18 @@
+/* 
+  WTImagePickerController.strings
+  WTImagePickerController
+
+  Created by Jayce on 2017/3/16.
+  Copyright © 2017年 WhatsTaste. All rights reserved.
+*/
+
+"Photos" = "照片";
+"OK" = "好的";
+"Cancel" = "取消";
+"Edit" = "编辑";
+"Preview" = "预览";
+"Done" = "完成";
+"Original" = "原图";
+"Reset" = "还原";
+"Select a maximum of %ld photos" = "你最多只能选择%ld照片";
+"Retry" = "重试";

@@ -1,0 +1,679 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2807C2131E7F772200D798FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C2121E7F772200D798FB /* main.m */; };
+		2807C2161E7F772200D798FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C2151E7F772200D798FB /* AppDelegate.m */; };
+		2807C2191E7F772200D798FB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C2181E7F772200D798FB /* ViewController.m */; };
+		2807C21C1E7F772200D798FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2807C21A1E7F772200D798FB /* Main.storyboard */; };
+		2807C21E1E7F772200D798FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2807C21D1E7F772200D798FB /* Assets.xcassets */; };
+		2807C2211E7F772200D798FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2807C21F1E7F772200D798FB /* LaunchScreen.storyboard */; };
+		2807C22C1E7F772200D798FB /* WTImagePickerControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C22B1E7F772200D798FB /* WTImagePickerControllerTests.m */; };
+		2807C2371E7F772200D798FB /* WTImagePickerControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C2361E7F772200D798FB /* WTImagePickerControllerUITests.m */; };
+		28F159B01E7F87D300946058 /* WTAlbumDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159981E7F87D300946058 /* WTAlbumDetailsViewController.swift */; };
+		28F159B11E7F87D300946058 /* WTAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159991E7F87D300946058 /* WTAlbumViewController.swift */; };
+		28F159B21E7F87D300946058 /* WTEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1599A1E7F87D300946058 /* WTEditingViewController.swift */; };
+		28F159B31E7F87D300946058 /* WTImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1599B1E7F87D300946058 /* WTImagePickerController.swift */; };
+		28F159B41E7F87D300946058 /* WTPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1599C1E7F87D300946058 /* WTPreviewViewController.swift */; };
+		28F159B51E7F87D300946058 /* PHImageManager+WhatsTaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1599E1E7F87D300946058 /* PHImageManager+WhatsTaste.swift */; };
+		28F159B61E7F87D300946058 /* UIImage+WhatsTaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1599F1E7F87D300946058 /* UIImage+WhatsTaste.swift */; };
+		28F159B71E7F87D300946058 /* WTEditingCropResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A01E7F87D300946058 /* WTEditingCropResult.swift */; };
+		28F159B81E7F87D300946058 /* WTAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A21E7F87D300946058 /* WTAlbumCell.swift */; };
+		28F159B91E7F87D300946058 /* WTAlbumDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A31E7F87D300946058 /* WTAlbumDetailsCell.swift */; };
+		28F159BA1E7F87D300946058 /* WTBadgeActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A41E7F87D300946058 /* WTBadgeActionView.swift */; };
+		28F159BB1E7F87D300946058 /* WTBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A51E7F87D300946058 /* WTBadgeView.swift */; };
+		28F159BC1E7F87D300946058 /* WTCheckboxActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A61E7F87D300946058 /* WTCheckboxActionView.swift */; };
+		28F159BD1E7F87D300946058 /* WTEditingControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A71E7F87D300946058 /* WTEditingControlsView.swift */; };
+		28F159BE1E7F87D300946058 /* WTEditingCropOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A81E7F87D300946058 /* WTEditingCropOverlayView.swift */; };
+		28F159BF1E7F87D300946058 /* WTEditingCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159A91E7F87D300946058 /* WTEditingCropView.swift */; };
+		28F159C01E7F87D300946058 /* WTEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159AA1E7F87D300946058 /* WTEditingView.swift */; };
+		28F159C11E7F87D300946058 /* WTPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159AB1E7F87D300946058 /* WTPreviewCell.swift */; };
+		28F159C21E7F87D300946058 /* WTPreviewControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159AC1E7F87D300946058 /* WTPreviewControlsView.swift */; };
+		28F159C31E7F87D300946058 /* WTSectorProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159AD1E7F87D300946058 /* WTSectorProgressView.swift */; };
+		28F159C41E7F87D300946058 /* WTSelectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159AE1E7F87D300946058 /* WTSelectionIndicatorView.swift */; };
+		28F159C51E7F87D300946058 /* WTImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28F159AF1E7F87D300946058 /* WTImagePickerController.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2807C2281E7F772200D798FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2807C2061E7F772200D798FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2807C20D1E7F772200D798FB;
+			remoteInfo = WTImagePickerController;
+		};
+		2807C2331E7F772200D798FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2807C2061E7F772200D798FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2807C20D1E7F772200D798FB;
+			remoteInfo = WTImagePickerController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2807C20E1E7F772200D798FB /* WTImagePickerController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTImagePickerController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2807C2121E7F772200D798FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2807C2141E7F772200D798FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2807C2151E7F772200D798FB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2807C2171E7F772200D798FB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2807C2181E7F772200D798FB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2807C21B1E7F772200D798FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2807C21D1E7F772200D798FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2807C2201E7F772200D798FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2807C2221E7F772200D798FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2807C2271E7F772200D798FB /* WTImagePickerControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WTImagePickerControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2807C22B1E7F772200D798FB /* WTImagePickerControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTImagePickerControllerTests.m; sourceTree = "<group>"; };
+		2807C22D1E7F772200D798FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2807C2321E7F772200D798FB /* WTImagePickerControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WTImagePickerControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2807C2361E7F772200D798FB /* WTImagePickerControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTImagePickerControllerUITests.m; sourceTree = "<group>"; };
+		2807C2381E7F772200D798FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F159981E7F87D300946058 /* WTAlbumDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumDetailsViewController.swift; sourceTree = "<group>"; };
+		28F159991E7F87D300946058 /* WTAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumViewController.swift; sourceTree = "<group>"; };
+		28F1599A1E7F87D300946058 /* WTEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingViewController.swift; sourceTree = "<group>"; };
+		28F1599B1E7F87D300946058 /* WTImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTImagePickerController.swift; sourceTree = "<group>"; };
+		28F1599C1E7F87D300946058 /* WTPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTPreviewViewController.swift; sourceTree = "<group>"; };
+		28F1599E1E7F87D300946058 /* PHImageManager+WhatsTaste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHImageManager+WhatsTaste.swift"; sourceTree = "<group>"; };
+		28F1599F1E7F87D300946058 /* UIImage+WhatsTaste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WhatsTaste.swift"; sourceTree = "<group>"; };
+		28F159A01E7F87D300946058 /* WTEditingCropResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingCropResult.swift; sourceTree = "<group>"; };
+		28F159A21E7F87D300946058 /* WTAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumCell.swift; sourceTree = "<group>"; };
+		28F159A31E7F87D300946058 /* WTAlbumDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumDetailsCell.swift; sourceTree = "<group>"; };
+		28F159A41E7F87D300946058 /* WTBadgeActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTBadgeActionView.swift; sourceTree = "<group>"; };
+		28F159A51E7F87D300946058 /* WTBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTBadgeView.swift; sourceTree = "<group>"; };
+		28F159A61E7F87D300946058 /* WTCheckboxActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTCheckboxActionView.swift; sourceTree = "<group>"; };
+		28F159A71E7F87D300946058 /* WTEditingControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingControlsView.swift; sourceTree = "<group>"; };
+		28F159A81E7F87D300946058 /* WTEditingCropOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingCropOverlayView.swift; sourceTree = "<group>"; };
+		28F159A91E7F87D300946058 /* WTEditingCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingCropView.swift; sourceTree = "<group>"; };
+		28F159AA1E7F87D300946058 /* WTEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingView.swift; sourceTree = "<group>"; };
+		28F159AB1E7F87D300946058 /* WTPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTPreviewCell.swift; sourceTree = "<group>"; };
+		28F159AC1E7F87D300946058 /* WTPreviewControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTPreviewControlsView.swift; sourceTree = "<group>"; };
+		28F159AD1E7F87D300946058 /* WTSectorProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTSectorProgressView.swift; sourceTree = "<group>"; };
+		28F159AE1E7F87D300946058 /* WTSelectionIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTSelectionIndicatorView.swift; sourceTree = "<group>"; };
+		28F159AF1E7F87D300946058 /* WTImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WTImagePickerController.bundle; sourceTree = "<group>"; };
+		28F159F61E7F887A00946058 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		28F159F71E7F887A00946058 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2807C20B1E7F772200D798FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2807C2241E7F772200D798FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2807C22F1E7F772200D798FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2807C2051E7F772200D798FB = {
+			isa = PBXGroup;
+			children = (
+				2807C2101E7F772200D798FB /* WTImagePickerController */,
+				2807C22A1E7F772200D798FB /* WTImagePickerControllerTests */,
+				2807C2351E7F772200D798FB /* WTImagePickerControllerUITests */,
+				2807C20F1E7F772200D798FB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2807C20F1E7F772200D798FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2807C20E1E7F772200D798FB /* WTImagePickerController.app */,
+				2807C2271E7F772200D798FB /* WTImagePickerControllerTests.xctest */,
+				2807C2321E7F772200D798FB /* WTImagePickerControllerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2807C2101E7F772200D798FB /* WTImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				28F159961E7F87D300946058 /* Vendor */,
+				2807C2141E7F772200D798FB /* AppDelegate.h */,
+				2807C2151E7F772200D798FB /* AppDelegate.m */,
+				2807C2171E7F772200D798FB /* ViewController.h */,
+				2807C2181E7F772200D798FB /* ViewController.m */,
+				2807C21A1E7F772200D798FB /* Main.storyboard */,
+				2807C21D1E7F772200D798FB /* Assets.xcassets */,
+				2807C21F1E7F772200D798FB /* LaunchScreen.storyboard */,
+				2807C2221E7F772200D798FB /* Info.plist */,
+				2807C2111E7F772200D798FB /* Supporting Files */,
+			);
+			path = WTImagePickerController;
+			sourceTree = "<group>";
+		};
+		2807C2111E7F772200D798FB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2807C2121E7F772200D798FB /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2807C22A1E7F772200D798FB /* WTImagePickerControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2807C22B1E7F772200D798FB /* WTImagePickerControllerTests.m */,
+				2807C22D1E7F772200D798FB /* Info.plist */,
+			);
+			path = WTImagePickerControllerTests;
+			sourceTree = "<group>";
+		};
+		2807C2351E7F772200D798FB /* WTImagePickerControllerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2807C2361E7F772200D798FB /* WTImagePickerControllerUITests.m */,
+				2807C2381E7F772200D798FB /* Info.plist */,
+			);
+			path = WTImagePickerControllerUITests;
+			sourceTree = "<group>";
+		};
+		28F159961E7F87D300946058 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				28F159971E7F87D300946058 /* Controllers */,
+				28F1599D1E7F87D300946058 /* Models */,
+				28F159A11E7F87D300946058 /* Views */,
+				28F159AF1E7F87D300946058 /* WTImagePickerController.bundle */,
+			);
+			name = Vendor;
+			path = ../../Vendor;
+			sourceTree = "<group>";
+		};
+		28F159971E7F87D300946058 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				28F1599B1E7F87D300946058 /* WTImagePickerController.swift */,
+				28F159991E7F87D300946058 /* WTAlbumViewController.swift */,
+				28F159981E7F87D300946058 /* WTAlbumDetailsViewController.swift */,
+				28F1599C1E7F87D300946058 /* WTPreviewViewController.swift */,
+				28F1599A1E7F87D300946058 /* WTEditingViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		28F1599D1E7F87D300946058 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28F159A01E7F87D300946058 /* WTEditingCropResult.swift */,
+				28F1599E1E7F87D300946058 /* PHImageManager+WhatsTaste.swift */,
+				28F1599F1E7F87D300946058 /* UIImage+WhatsTaste.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		28F159A11E7F87D300946058 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28F159A21E7F87D300946058 /* WTAlbumCell.swift */,
+				28F159A31E7F87D300946058 /* WTAlbumDetailsCell.swift */,
+				28F159AB1E7F87D300946058 /* WTPreviewCell.swift */,
+				28F159AA1E7F87D300946058 /* WTEditingView.swift */,
+				28F159AC1E7F87D300946058 /* WTPreviewControlsView.swift */,
+				28F159A71E7F87D300946058 /* WTEditingControlsView.swift */,
+				28F159A81E7F87D300946058 /* WTEditingCropOverlayView.swift */,
+				28F159A91E7F87D300946058 /* WTEditingCropView.swift */,
+				28F159A41E7F87D300946058 /* WTBadgeActionView.swift */,
+				28F159A51E7F87D300946058 /* WTBadgeView.swift */,
+				28F159A61E7F87D300946058 /* WTCheckboxActionView.swift */,
+				28F159AD1E7F87D300946058 /* WTSectorProgressView.swift */,
+				28F159AE1E7F87D300946058 /* WTSelectionIndicatorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2807C20D1E7F772200D798FB /* WTImagePickerController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2807C23B1E7F772200D798FB /* Build configuration list for PBXNativeTarget "WTImagePickerController" */;
+			buildPhases = (
+				2807C20A1E7F772200D798FB /* Sources */,
+				2807C20B1E7F772200D798FB /* Frameworks */,
+				2807C20C1E7F772200D798FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WTImagePickerController;
+			productName = WTImagePickerController;
+			productReference = 2807C20E1E7F772200D798FB /* WTImagePickerController.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2807C2261E7F772200D798FB /* WTImagePickerControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2807C23E1E7F772200D798FB /* Build configuration list for PBXNativeTarget "WTImagePickerControllerTests" */;
+			buildPhases = (
+				2807C2231E7F772200D798FB /* Sources */,
+				2807C2241E7F772200D798FB /* Frameworks */,
+				2807C2251E7F772200D798FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2807C2291E7F772200D798FB /* PBXTargetDependency */,
+			);
+			name = WTImagePickerControllerTests;
+			productName = WTImagePickerControllerTests;
+			productReference = 2807C2271E7F772200D798FB /* WTImagePickerControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2807C2311E7F772200D798FB /* WTImagePickerControllerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2807C2411E7F772200D798FB /* Build configuration list for PBXNativeTarget "WTImagePickerControllerUITests" */;
+			buildPhases = (
+				2807C22E1E7F772200D798FB /* Sources */,
+				2807C22F1E7F772200D798FB /* Frameworks */,
+				2807C2301E7F772200D798FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2807C2341E7F772200D798FB /* PBXTargetDependency */,
+			);
+			name = WTImagePickerControllerUITests;
+			productName = WTImagePickerControllerUITests;
+			productReference = 2807C2321E7F772200D798FB /* WTImagePickerControllerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2807C2061E7F772200D798FB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = WhatsTaste;
+				TargetAttributes = {
+					2807C20D1E7F772200D798FB = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y7456QC42Y;
+						ProvisioningStyle = Automatic;
+					};
+					2807C2261E7F772200D798FB = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y7456QC42Y;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2807C20D1E7F772200D798FB;
+					};
+					2807C2311E7F772200D798FB = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y7456QC42Y;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2807C20D1E7F772200D798FB;
+					};
+				};
+			};
+			buildConfigurationList = 2807C2091E7F772200D798FB /* Build configuration list for PBXProject "WTImagePickerController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2807C2051E7F772200D798FB;
+			productRefGroup = 2807C20F1E7F772200D798FB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2807C20D1E7F772200D798FB /* WTImagePickerController */,
+				2807C2261E7F772200D798FB /* WTImagePickerControllerTests */,
+				2807C2311E7F772200D798FB /* WTImagePickerControllerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2807C20C1E7F772200D798FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2807C2211E7F772200D798FB /* LaunchScreen.storyboard in Resources */,
+				2807C21E1E7F772200D798FB /* Assets.xcassets in Resources */,
+				28F159C51E7F87D300946058 /* WTImagePickerController.bundle in Resources */,
+				2807C21C1E7F772200D798FB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2807C2251E7F772200D798FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2807C2301E7F772200D798FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2807C20A1E7F772200D798FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F159BF1E7F87D300946058 /* WTEditingCropView.swift in Sources */,
+				28F159BC1E7F87D300946058 /* WTCheckboxActionView.swift in Sources */,
+				28F159B71E7F87D300946058 /* WTEditingCropResult.swift in Sources */,
+				2807C2191E7F772200D798FB /* ViewController.m in Sources */,
+				28F159BB1E7F87D300946058 /* WTBadgeView.swift in Sources */,
+				28F159B61E7F87D300946058 /* UIImage+WhatsTaste.swift in Sources */,
+				28F159C21E7F87D300946058 /* WTPreviewControlsView.swift in Sources */,
+				28F159C31E7F87D300946058 /* WTSectorProgressView.swift in Sources */,
+				2807C2161E7F772200D798FB /* AppDelegate.m in Sources */,
+				28F159B11E7F87D300946058 /* WTAlbumViewController.swift in Sources */,
+				28F159B01E7F87D300946058 /* WTAlbumDetailsViewController.swift in Sources */,
+				28F159B41E7F87D300946058 /* WTPreviewViewController.swift in Sources */,
+				28F159BA1E7F87D300946058 /* WTBadgeActionView.swift in Sources */,
+				28F159B51E7F87D300946058 /* PHImageManager+WhatsTaste.swift in Sources */,
+				28F159B91E7F87D300946058 /* WTAlbumDetailsCell.swift in Sources */,
+				28F159BD1E7F87D300946058 /* WTEditingControlsView.swift in Sources */,
+				28F159B81E7F87D300946058 /* WTAlbumCell.swift in Sources */,
+				28F159B21E7F87D300946058 /* WTEditingViewController.swift in Sources */,
+				28F159C41E7F87D300946058 /* WTSelectionIndicatorView.swift in Sources */,
+				28F159C01E7F87D300946058 /* WTEditingView.swift in Sources */,
+				28F159BE1E7F87D300946058 /* WTEditingCropOverlayView.swift in Sources */,
+				28F159C11E7F87D300946058 /* WTPreviewCell.swift in Sources */,
+				28F159B31E7F87D300946058 /* WTImagePickerController.swift in Sources */,
+				2807C2131E7F772200D798FB /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2807C2231E7F772200D798FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2807C22C1E7F772200D798FB /* WTImagePickerControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2807C22E1E7F772200D798FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2807C2371E7F772200D798FB /* WTImagePickerControllerUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2807C2291E7F772200D798FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2807C20D1E7F772200D798FB /* WTImagePickerController */;
+			targetProxy = 2807C2281E7F772200D798FB /* PBXContainerItemProxy */;
+		};
+		2807C2341E7F772200D798FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2807C20D1E7F772200D798FB /* WTImagePickerController */;
+			targetProxy = 2807C2331E7F772200D798FB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2807C21A1E7F772200D798FB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2807C21B1E7F772200D798FB /* Base */,
+				28F159F61E7F887A00946058 /* zh-Hans */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2807C21F1E7F772200D798FB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2807C2201E7F772200D798FB /* Base */,
+				28F159F71E7F887A00946058 /* zh-Hans */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2807C2391E7F772200D798FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2807C23A1E7F772200D798FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2807C23C1E7F772200D798FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y7456QC42Y;
+				INFOPLIST_FILE = WTImagePickerController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatsTaste.WTImagePickerController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		2807C23D1E7F772200D798FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y7456QC42Y;
+				INFOPLIST_FILE = WTImagePickerController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatsTaste.WTImagePickerController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		2807C23F1E7F772200D798FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = Y7456QC42Y;
+				INFOPLIST_FILE = WTImagePickerControllerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatsTaste.WTImagePickerControllerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WTImagePickerController.app/WTImagePickerController";
+			};
+			name = Debug;
+		};
+		2807C2401E7F772200D798FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = Y7456QC42Y;
+				INFOPLIST_FILE = WTImagePickerControllerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatsTaste.WTImagePickerControllerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WTImagePickerController.app/WTImagePickerController";
+			};
+			name = Release;
+		};
+		2807C2421E7F772200D798FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = Y7456QC42Y;
+				INFOPLIST_FILE = WTImagePickerControllerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatsTaste.WTImagePickerControllerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WTImagePickerController;
+			};
+			name = Debug;
+		};
+		2807C2431E7F772200D798FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = Y7456QC42Y;
+				INFOPLIST_FILE = WTImagePickerControllerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatsTaste.WTImagePickerControllerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = WTImagePickerController;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2807C2091E7F772200D798FB /* Build configuration list for PBXProject "WTImagePickerController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2807C2391E7F772200D798FB /* Debug */,
+				2807C23A1E7F772200D798FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2807C23B1E7F772200D798FB /* Build configuration list for PBXNativeTarget "WTImagePickerController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2807C23C1E7F772200D798FB /* Debug */,
+				2807C23D1E7F772200D798FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2807C23E1E7F772200D798FB /* Build configuration list for PBXNativeTarget "WTImagePickerControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2807C23F1E7F772200D798FB /* Debug */,
+				2807C2401E7F772200D798FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2807C2411E7F772200D798FB /* Build configuration list for PBXNativeTarget "WTImagePickerControllerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2807C2421E7F772200D798FB /* Debug */,
+				2807C2431E7F772200D798FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2807C2061E7F772200D798FB /* Project object */;
+}

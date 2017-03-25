@@ -30,6 +30,9 @@ public extension PHImageManager {
             // Cancel
             if let cancelled = info?[PHImageCancelledKey] as? NSNumber {
                 if cancelled.boolValue {
+                    Thread.executeOnMainThread {
+                        resultHandler(nil, info)
+                    }
                     return
                 }
             }
@@ -70,6 +73,7 @@ public extension PHImageManager {
                                     } else {
                                         if let degraded = info?[PHImageResultIsDegradedKey] as? NSNumber {
                                             if degraded.boolValue {
+//                                                print(#function + " Drop degraded image")
                                                 return
                                             }
                                         }
@@ -97,7 +101,6 @@ public extension PHImageManager {
                 }
             }
         })
-//        requestID.timer(options.progressHandler).resume()
         return requestID
     }
     

@@ -240,21 +240,20 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func previewControlsViewDidFinish(_ view: WTPreviewControlsView) {
-        if selectedIdentifiers.count < pickLimit {
+        if selectedIdentifiers.count == 0 {
             if let indexPath = currentIndexPath() {
                 guard indexPath.item < self.assets.count else {
                     return
                 }
                 let asset = self.assets[indexPath.item]
-                if selectedIdentifiers.index(of: asset.localIdentifier) == nil {
-                    selectedIdentifiers.append(asset.localIdentifier)
-                    delegate?.previewViewController(self, didSelectAsset: asset)
-                    updateSelections(atIndex: indexPath.item)
-                    collectionView.reloadItems(at: [indexPath])
-                }
+                selectedIdentifiers.append(asset.localIdentifier)
+                delegate?.previewViewController(self, didSelectAsset: asset)
+                updateSelections(atIndex: indexPath.item)
+                collectionView.reloadItems(at: [indexPath])
             }
         }
         
+        _ = navigationController?.popViewController(animated: true)
         delegate?.previewViewControllerDidFinish(self)
     }
     

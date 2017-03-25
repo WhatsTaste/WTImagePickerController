@@ -28,6 +28,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
     }
     
     deinit {
+//        print(#file + #function)
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
@@ -45,6 +46,8 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         view.backgroundColor = UIColor.white
         view.addSubview(collectionView)
         view.addSubview(controlsView)
+        view.addSubview(visualEffectView)
+        visualEffectView.contentView.addSubview(activityIndicatorView)
         
         view.addConstraint(NSLayoutConstraint.init(item: collectionView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .right, relatedBy: .equal, toItem: collectionView, attribute: .right, multiplier: 1, constant: 0))
@@ -55,6 +58,14 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         view.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
         controlsView.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: controlsViewHeight))
+        
+        view.addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .centerY, relatedBy: .equal, toItem: collectionView, attribute: .centerY, multiplier: 1, constant: 0))
+        visualEffectView.addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80))
+        visualEffectView.addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .height, relatedBy: .equal, toItem: visualEffectView, attribute: .width, multiplier: 1, constant: 0))
+        
+        visualEffectView.contentView.addConstraint(NSLayoutConstraint.init(item: activityIndicatorView, attribute: .centerX, relatedBy: .equal, toItem: visualEffectView.contentView, attribute: .centerX, multiplier: 1, constant: 0))
+        visualEffectView.contentView.addConstraint(NSLayoutConstraint.init(item: activityIndicatorView, attribute: .centerY, relatedBy: .equal, toItem: visualEffectView.contentView, attribute: .centerY, multiplier: 1, constant: 0))
         
         resetCachedAssets()
         PHPhotoLibrary.shared().register(self)
@@ -308,10 +319,12 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
     
     @objc private func done() {
         guard selectedIdentifiers.count > 0 else {
-            self.delegate?.albumDetailsViewController(self, didFinishWithImages: [])
+            delegate?.albumDetailsViewController(self, didFinishWithImages: [])
             return
         }
-//        print("1:" + "\(selectedIdentifiers)")
+//        view.isUserInteractionEnabled = false
+        activityIndicatorView.startAnimating()
+        visualEffectView.isHidden = false
         var assets = [PHAsset]()
         for i in 0 ..< selectedIdentifiers.count {
             let identifier = selectedIdentifiers[i]
@@ -320,40 +333,53 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
             }
         }
         
-//        print("Starts")
-        DispatchQueue.global().async {
+        // Use a serial queue
+        DispatchQueue(label: String(describing: self)).async { [weak self] in
+            guard self != nil else {
+                print("Self got nil when it's our turn to do something")
+                return
+            }
+            
             var images = [UIImage]()
+            var counter: Int = 0
             for i in 0 ..< assets.count {
+                guard self != nil else {
+                    print("Self got nil at the \(i) request, so we'll drop the remaining \(assets.count - i) requests")
+                    return
+                }
                 let asset = assets[i]
-//                print("2:" + asset.localIdentifier)
-                let resultHandler: ((_ image: UIImage?, _ info: [AnyHashable : Any]?) -> Void) = { (image, _) in
-                    guard image != nil else {
+                let resultHandler: ((_ image: UIImage?, _ info: [AnyHashable : Any]?) -> Void) = { [weak self] (image, _) in
+//                    print("Response \(i):" + asset.localIdentifier + "\(image?.size)")
+                    counter = counter + 1
+                    guard self != nil else {
+                        print("Self got nil at the \(i) response")
                         return
                     }
-//                    print("3:" + asset.localIdentifier + "\(image!)")
-                    images.append(image!)
-                    
-                    // Callback when finished
-                    if images.count == assets.count {
-                        DispatchQueue.main.async {
-                            self.delegate?.albumDetailsViewController(self, didFinishWithImages: images)
+                    if image != nil {
+                        images.append(image!)
+                        
+                        // Callback when finished
+                        if counter == assets.count {
+                            self!.view.isUserInteractionEnabled = true
+                            self!.visualEffectView.isHidden = true
+                            self!.activityIndicatorView.stopAnimating()
+                            self!.delegate?.albumDetailsViewController(self!, didFinishWithImages: images)
                         }
                     }
                 }
-                if let image = self.editedImages[asset.localIdentifier] {
-                    DispatchQueue.main.async {
-                        resultHandler(image, nil)
-                    }
+                if let image = self!.editedImages[asset.localIdentifier] {
+                    resultHandler(image, nil)
                 } else {
-                    if self.original {
-                        self.imageManager.requestOriginalImage(for: asset, isSynchronous: true, resultHandler: resultHandler)
+//                    print("Starts \(i):" + asset.localIdentifier)
+                    if self!.original {
+                        self!.imageManager.requestOriginalImage(for: asset, isSynchronous: true, resultHandler: resultHandler)
                     } else {
-                        self.imageManager.requestFullScreenImage(for: asset, isSynchronous: true, resultHandler: resultHandler)
+                        self!.imageManager.requestFullScreenImage(for: asset, isSynchronous: true, resultHandler: resultHandler)
                     }
+//                    print("Ends \(i):" + asset.localIdentifier)
                 }
             }
         }
-//        print("Ends")
     }
     
     func appleResult(_ result: WTEditingResult, asset: PHAsset) {
@@ -389,22 +415,26 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         
         // Update only if the visible area is significantly different from the last preheated area.
         let delta = abs(preheatRect.midY - previousPreheatRect.midY)
-        guard delta > view.bounds.height / 3 else { return }
+        guard delta > view.bounds.height / 3 else {
+            return
+        }
         
         // Compute the assets to start caching and to stop caching.
         let (addedRects, removedRects) = differencesBetweenRects(previousPreheatRect, preheatRect)
-        let addedAssets = addedRects
-            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .map { indexPath in fetchResult.object(at: indexPath.item) }
-        let removedAssets = removedRects
-            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
-            .map { indexPath in fetchResult.object(at: indexPath.item) }
+        let addedAssets = addedRects.flatMap { rect in
+            collectionView.indexPathsForElements(in: rect)
+            }.map { indexPath in
+                fetchResult.object(at: indexPath.item)
+        }
+        let removedAssets = removedRects.flatMap { rect in
+            collectionView.indexPathsForElements(in: rect)
+            }.map { indexPath in
+                fetchResult.object(at: indexPath.item)
+        }
         
         // Update the assets the PHCachingImageManager is caching.
-        imageManager.startCachingImages(for: addedAssets,
-                                        targetSize: thumbnailSize, contentMode: .aspectFill, options: nil)
-        imageManager.stopCachingImages(for: removedAssets,
-                                       targetSize: thumbnailSize, contentMode: .aspectFill, options: nil)
+        imageManager.startCachingImages(for: addedAssets, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil)
+        imageManager.stopCachingImages(for: removedAssets, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil)
         
         // Store the preheat rect to compare against in the future.
         previousPreheatRect = preheatRect
@@ -414,21 +444,17 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         if old.intersects(new) {
             var added = [CGRect]()
             if new.maxY > old.maxY {
-                added += [CGRect(x: new.origin.x, y: old.maxY,
-                                 width: new.width, height: new.maxY - old.maxY)]
+                added += [CGRect(x: new.origin.x, y: old.maxY, width: new.width, height: new.maxY - old.maxY)]
             }
             if old.minY > new.minY {
-                added += [CGRect(x: new.origin.x, y: new.minY,
-                                 width: new.width, height: old.minY - new.minY)]
+                added += [CGRect(x: new.origin.x, y: new.minY, width: new.width, height: old.minY - new.minY)]
             }
             var removed = [CGRect]()
             if new.maxY < old.maxY {
-                removed += [CGRect(x: new.origin.x, y: new.maxY,
-                                   width: new.width, height: old.maxY - new.maxY)]
+                removed += [CGRect(x: new.origin.x, y: new.maxY, width: new.width, height: old.maxY - new.maxY)]
             }
             if old.minY < new.minY {
-                removed += [CGRect(x: new.origin.x, y: old.minY,
-                                   width: new.width, height: new.minY - old.minY)]
+                removed += [CGRect(x: new.origin.x, y: old.minY, width: new.width, height: new.minY - old.minY)]
             }
             return (added, removed)
         } else {
@@ -470,6 +496,25 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         view.doneBadgeActionView.isEnabled = false
         view.tintColor = self.tintColor
         return view
+    }()
+    
+    lazy private var visualEffectView: UIVisualEffectView = {
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        effectView.translatesAutoresizingMaskIntoConstraints = false
+        effectView.backgroundColor = UIColor.clear
+        effectView.isUserInteractionEnabled = false
+        effectView.isHidden = true
+        effectView.layer.masksToBounds = true
+        effectView.layer.cornerRadius = 10
+        return effectView
+    }()
+    
+    lazy private var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.tintColor = self.tintColor
+        return activityIndicatorView
     }()
     
     private var collection: PHAssetCollection!

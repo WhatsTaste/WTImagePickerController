@@ -95,10 +95,9 @@ class WTEditingControlsView: UIView {
     }()
     
     lazy private var resetButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.clear
-//        button.setImage(UIImage.resetImage(), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.lightGray, for: .disabled)

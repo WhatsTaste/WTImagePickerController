@@ -43,7 +43,7 @@ class WTAlbumDetailsControlsView: UIView {
         addConstraint(NSLayoutConstraint.init(item: previewButton, attribute: .top, relatedBy: .equal, toItem: editButton, attribute: .top, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: previewButton, attribute: .bottom, relatedBy: .equal, toItem: editButton, attribute: .bottom, multiplier: 1, constant: 0))
         
-//        addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: previewButton, attribute: .right, multiplier: 1, constant: spacing))
+        addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: previewButton, attribute: .right, multiplier: 1, constant: spacing))
         addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .top, relatedBy: .equal, toItem: previewButton, attribute: .top, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .bottom, relatedBy: .equal, toItem: previewButton, attribute: .bottom, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: self, attribute: .right, relatedBy: .equal, toItem: doneBadgeActionView, attribute: .right, multiplier: 1, constant: horizontalMargin))
@@ -106,7 +106,7 @@ class WTAlbumDetailsControlsView: UIView {
     }()
     
     lazy public private(set) var editButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.clear
         button.contentHorizontalAlignment = .left
@@ -119,7 +119,7 @@ class WTAlbumDetailsControlsView: UIView {
     }()
     
     lazy public private(set) var previewButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.clear
         button.contentHorizontalAlignment = .left
@@ -136,10 +136,9 @@ class WTAlbumDetailsControlsView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.clear
         view.tintColor = self.tintColor
-        view.contentHorizontalAlignment = .right
         view.contentButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         view.contentButton.setTitle(self.localizedString("Done"), for: .normal)
-        view.addTarget(self, action: #selector(done), for: .touchUpInside)
+        view.contentButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         return view
     }()
 }

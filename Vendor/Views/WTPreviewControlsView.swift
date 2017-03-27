@@ -39,16 +39,17 @@ class WTPreviewControlsView: UIView {
         addConstraint(NSLayoutConstraint.init(item: editButton, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: verticalMargin))
         addConstraint(NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: editButton, attribute: .bottom, multiplier: 1, constant: verticalMargin))
         
-        addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .left, relatedBy: .equal, toItem: editButton, attribute: .right, multiplier: 1, constant: spacing))
+        addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: editButton, attribute: .right, multiplier: 1, constant: spacing))
         addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .top, relatedBy: .equal, toItem: editButton, attribute: .top, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .bottom, relatedBy: .equal, toItem: editButton, attribute: .bottom, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .width, relatedBy: .equal, toItem: editButton, attribute: .width, multiplier: 1, constant: 0))
+        let centerX = NSLayoutConstraint.init(item: originalActionView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
+        centerX.priority = UILayoutPriorityDefaultLow
+        addConstraint(centerX)
         
-        addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .left, relatedBy: .equal, toItem: originalActionView, attribute: .right, multiplier: 1, constant: spacing))
+        addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: originalActionView, attribute: .right, multiplier: 1, constant: spacing))
         addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .top, relatedBy: .equal, toItem: originalActionView, attribute: .top, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .bottom, relatedBy: .equal, toItem: originalActionView, attribute: .bottom, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: self, attribute: .right, relatedBy: .equal, toItem: doneBadgeActionView, attribute: .right, multiplier: 1, constant: horizontalMargin))
-        addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .width, relatedBy: .equal, toItem: originalActionView, attribute: .width, multiplier: 1, constant: 0))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -109,7 +110,7 @@ class WTPreviewControlsView: UIView {
     }()
     
     lazy public private(set) var editButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.clear
         button.contentHorizontalAlignment = .left
@@ -138,10 +139,9 @@ class WTPreviewControlsView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.clear
         view.tintColor = self.tintColor
-        view.contentHorizontalAlignment = .right
         view.contentButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         view.contentButton.setTitle(self.localizedString("Done"), for: .normal)
-        view.addTarget(self, action: #selector(done), for: .touchUpInside)
+        view.contentButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         return view
     }()
 }

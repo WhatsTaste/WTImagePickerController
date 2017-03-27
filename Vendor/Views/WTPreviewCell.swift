@@ -173,7 +173,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
     }()
     
     lazy public private(set) var contentButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.clear
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)

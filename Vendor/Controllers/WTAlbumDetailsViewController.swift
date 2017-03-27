@@ -322,7 +322,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
             delegate?.albumDetailsViewController(self, didFinishWithImages: [])
             return
         }
-//        view.isUserInteractionEnabled = false
+        view.isUserInteractionEnabled = false
         activityIndicatorView.startAnimating()
         visualEffectView.isHidden = false
         var assets = [PHAsset]()
@@ -493,7 +493,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         view.delegate = self
         view.editButton.isEnabled = false
         view.previewButton.isEnabled = false
-        view.doneBadgeActionView.isEnabled = false
+        view.doneBadgeActionView.contentButton.isEnabled = false
         view.tintColor = self.tintColor
         return view
     }()
@@ -537,7 +537,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
             
             controlsView.editButton.isEnabled = selectedIdentifiers.count == 1
             controlsView.previewButton.isEnabled = selectedIdentifiers.count > 0
-            controlsView.doneBadgeActionView.isEnabled = selectedIdentifiers.count > 0
+            controlsView.doneBadgeActionView.contentButton.isEnabled = selectedIdentifiers.count > 0
             controlsView.doneBadgeActionView.badge = selectedIdentifiers.count
         }
     }

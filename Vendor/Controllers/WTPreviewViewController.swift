@@ -120,40 +120,42 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
 //                print(#function + ":\(indexPath.item) Downloading begins")
                 let request = {
                     requestID = PHImageManager.default().requestFullScreenImage(for: asset, allowsDegraded: true, resultHandler: { [weak self, weak cell, weak asset] (image, info) in
+//                        print(#function + ":\(indexPath.item) Downloading ends with image size" + "\(String(describing: image?.size))")
                         guard self != nil else {
                             return
                         }
-                        guard image != nil else {
-                            cell?.contentButton.isHidden = false
-                            self?.failedFlags[indexPath.item] = true
-                            self?.progresses[indexPath.item] = nil
-                            return
-                        }
-//                        print(#function + ":\(indexPath.item) Downloading ends with image size" + "\(image!.size)")
                         self?.requestIDs[indexPath.item] = 0
-                        if cell?.representedAssetIdentifier == asset?.localIdentifier {
-                            cell?.progressView.isHidden = true
+                        self?.progresses[indexPath.item] = nil
+                        var degradedImage: UIImage?
+                        var finalImage: UIImage?
+                        if image == nil {
+                            self?.failedFlags[indexPath.item] = true
+                        } else {
+                            self?.failedFlags[indexPath.item] = nil
                             if (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue ?? false {
                                 let size = CGSize(width: self!.view.bounds.width, height: self!.view.bounds.width)
-                                cell?.contentImageView.image = image!.fitSize(size)
-                                self?.degradedImages[indexPath.item] = cell?.contentImageView.image
+                                degradedImage = image!.fitSize(size)
+                                finalImage = degradedImage
                             } else {
-                                cell?.contentImageView.image = image
-                                self?.degradedImages[indexPath.item] = nil
-                                self?.failedFlags[indexPath.item] = nil
-                                self?.progresses[indexPath.item] = nil
+                                finalImage = image
                             }
+                        }
+                        self?.degradedImages[indexPath.item] = degradedImage
+                        if cell?.representedAssetIdentifier == asset?.localIdentifier {
+                            cell?.progressView.isHidden = true
+                            cell?.contentButton.isHidden = !(image == nil)
+                            cell?.contentImageView.image = finalImage
                         }
                         }, progressHandler: { [weak self, weak cell, weak asset] progress in
                             guard self != nil else {
                                 return
                             }
+                            let progressValue = CGFloat(max(progress, 0))
+//                            print(#function + ":\(indexPath.item) Downloading:" + "\(progressValue)")
+                            self?.progresses[indexPath.item] = progressValue
                             if cell?.representedAssetIdentifier == asset?.localIdentifier {
-                                let progressValue = CGFloat(max(progress, 0))
-//                                print(#function + ":\(indexPath.item) Downloading:" + "\(progressValue)")
                                 cell?.progressView.isHidden = false
                                 cell?.progressView.progress = progressValue
-                                self?.progresses[indexPath.item] = progressValue
                             }
                     })
                     self.requestIDs[indexPath.item] = requestID

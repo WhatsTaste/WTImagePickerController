@@ -29,7 +29,7 @@ class WTSelectionIndicatorView: UIControl {
             let bounds = self.bounds.insetBy(dx: insets.left + insets.right, dy: insets.top + insets.bottom)
             let size = bounds.width
             
-            var path = UIBezierPath(arcCenter: .init(x: bounds.midX, y: bounds.midY), radius: bounds.width / 2, startAngle: -CGFloat(M_PI / 4), endAngle: CGFloat(2 * M_PI - M_PI / 4), clockwise: true)
+            var path = UIBezierPath(arcCenter: .init(x: bounds.midX, y: bounds.midY), radius: bounds.width / 2, startAngle: -CGFloat(Double.pi / 4), endAngle: CGFloat(2 * Double.pi - Double.pi / 4), clockwise: true)
             context?.saveGState()
             let tintColor = self.tintColor!
             let fillColor = isSelected ? tintColor : UIColor.clear
@@ -61,8 +61,8 @@ class WTSelectionIndicatorView: UIControl {
             let bounds = self.bounds.insetBy(dx: insets.left + insets.right, dy: insets.top + insets.bottom)
             let arcCenter = CGPoint.init(x: bounds.midX, y: bounds.midY)
             let radius = bounds.width / 2
-            let startAngle = -CGFloat(M_PI / 4)
-            let endAngle = CGFloat(2 * M_PI - M_PI / 4)
+            let startAngle = -CGFloat(Double.pi / 4)
+            let endAngle = CGFloat(2 * Double.pi - Double.pi / 4)
             let clockwise = true
             
             var path = UIBezierPath(arcCenter: arcCenter, radius: radius - 2, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)

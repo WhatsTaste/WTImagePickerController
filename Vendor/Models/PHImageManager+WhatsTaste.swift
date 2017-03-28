@@ -62,7 +62,7 @@ public extension PHImageManager {
                         if isInCloud.boolValue {
                             print(#function + "Starts request from iCloud")
                             PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: contentMode, options: options, resultHandler: { (image, info) in
-                                print(#function + "Ends request from iCloud" + ", info is: \(info)")
+                                print(#function + "Ends request from iCloud" + ", info is: \(String(describing: info))")
                                 // Error
                                 if image != nil && info?[PHImageErrorKey] == nil {
                                     // Degraded
@@ -96,7 +96,7 @@ public extension PHImageManager {
                 }
             } else {
                 Thread.executeOnMainThread {
-                    print(#function + "\(info?[PHImageErrorKey]!)")
+                    print(#function + "\(String(describing: info?[PHImageErrorKey]!))")
                     resultHandler(nil, info)
                 }
             }

@@ -34,8 +34,8 @@ public class WTSectorProgressView: UIView {
         context?.restoreGState()
         
         let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
-        let startAngle = CGFloat(-M_PI / 2)
-        let endAngle = min(progress, 1) * CGFloat(M_PI * 2) + startAngle
+        let startAngle = CGFloat(-Double.pi / 2)
+        let endAngle = min(progress, 1) * CGFloat(Double.pi * 2) + startAngle
         path = UIBezierPath(arcCenter: center, radius: radius / 2 - borderWidth / 2 - innerInset + 1, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         path.addLine(to: center)
         path.close()

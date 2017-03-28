@@ -298,7 +298,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         let contentRect = contentBounds
         var cropFrame = cropBoxFrame
         
-        if cropFrame.width < CGFloat(FLT_EPSILON) || cropFrame.height < CGFloat(FLT_EPSILON) {
+        if cropFrame.width < CGFloat(Float.ulpOfOne) || cropFrame.height < CGFloat(Float.ulpOfOne) {
             return
         }
         
@@ -326,12 +326,12 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
                 return
             }
             self!.disableForgroundMatching = true
-            if scale < 1 - CGFloat(FLT_EPSILON) || scale > 1 + CGFloat(FLT_EPSILON) {
+            if scale < 1 - CGFloat(Float.ulpOfOne) || scale > 1 + CGFloat(Float.ulpOfOne) {
                 self!.scrollView.zoomScale *= scale
                 self!.scrollView.zoomScale = min(self!.scrollView.maximumZoomScale, self!.scrollView.zoomScale)
             }
             
-            if self!.scrollView.zoomScale < self!.scrollView.maximumZoomScale - CGFloat(FLT_EPSILON) {
+            if self!.scrollView.zoomScale < self!.scrollView.maximumZoomScale - CGFloat(Float.ulpOfOne) {
                 offset.x = min(-cropFrame.maxX + self!.scrollView.contentSize.width, offset.x)
                 offset.y = min(-cropFrame.maxY + self!.scrollView.contentSize.height, offset.y)
                 self!.scrollView.contentOffset = offset
@@ -379,7 +379,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         
         scrollView.zoomScale = scrollView.minimumZoomScale
         scrollView.contentSize = scaledImageSize
-        if frame.width < scaledImageSize.width - CGFloat(FLT_EPSILON) || frame.height < scaledImageSize.height - CGFloat(FLT_EPSILON) {
+        if frame.width < scaledImageSize.width - CGFloat(Float.ulpOfOne) || frame.height < scaledImageSize.height - CGFloat(Float.ulpOfOne) {
             var offset = CGPoint.zero
             offset.x = -floor((scrollView.frame.width - scaledImageSize.width) * 0.5)
             offset.y = -floor((scrollView.frame.height - scaledImageSize.height) * 0.5)
@@ -419,17 +419,17 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         var angleInRadians: CGFloat = 0
         switch angle {
         case 90:
-            angleInRadians = CGFloat(M_PI_2)
+            angleInRadians = CGFloat(Double.pi / 2)
         case -90:
-            angleInRadians = -CGFloat(M_PI_2)
+            angleInRadians = -CGFloat(Double.pi / 2)
         case 180:
-            angleInRadians = CGFloat(M_PI)
+            angleInRadians = CGFloat(Double.pi)
         case -180:
-            angleInRadians = -CGFloat(M_PI)
+            angleInRadians = -CGFloat(Double.pi)
         case 270:
-            angleInRadians = CGFloat(M_PI + M_PI_2)
+            angleInRadians = CGFloat(Double.pi + Double.pi / 2)
         case -270:
-            angleInRadians = -CGFloat(M_PI + M_PI_2)
+            angleInRadians = -CGFloat(Double.pi + Double.pi / 2)
         default:
             break
         }
@@ -516,7 +516,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
             overlayView.isHidden = true
             
             UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: .beginFromCurrentState, animations: { 
-                var transform = CGAffineTransform(rotationAngle: CGFloat(clockwise ? M_PI_2 : -M_PI_2))
+                var transform = CGAffineTransform(rotationAngle: CGFloat(clockwise ? Double.pi / 2 : -Double.pi / 2))
                 transform = transform.scaledBy(x: scale, y: scale)
                 snapshotView!.transform = transform
             }, completion: { (completed) in
@@ -629,7 +629,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         if angle != 0 {
             canReset = true
 //            print(#function + "rotated")
-        } else if scrollView.zoomScale > scrollView.minimumZoomScale + CGFloat(FLT_EPSILON)  {
+        } else if scrollView.zoomScale > scrollView.minimumZoomScale + CGFloat(Float.ulpOfOne)  {
             canReset = true
 //            print(#function + "zoomed")
         } else if Int(floor(cropBoxFrame.width)) != Int(floor(originalCropBoxSize.width)) || Int(floor(cropBoxFrame.height)) != Int(floor(originalCropBoxSize.height)) {
@@ -917,7 +917,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
                 return
             }
             
-            if cropBoxFrame.width < CGFloat(FLT_EPSILON) || cropBoxFrame.height < CGFloat(FLT_EPSILON) {
+            if cropBoxFrame.width < CGFloat(Float.ulpOfOne) || cropBoxFrame.height < CGFloat(Float.ulpOfOne) {
                 return
             }
             self.foregroundContainerView.frame = cropBoxFrame

@@ -28,8 +28,8 @@ class WTBadgeView: UIView {
         let frame = rect
         let arcCenter = CGPoint.init(x: frame.midX, y: frame.midY)
         let radius = frame.width / 2
-        let startAngle = -CGFloat(M_PI / 4)
-        let endAngle = CGFloat(2 * M_PI - M_PI / 4)
+        let startAngle = -CGFloat(Double.pi / 4)
+        let endAngle = CGFloat(2 * Double.pi - Double.pi / 4)
         let clockwise = true
         
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)

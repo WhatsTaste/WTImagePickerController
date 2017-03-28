@@ -74,7 +74,7 @@ public extension UIImage {
             let imageView = UIImageView(image: self)
             imageView.layer.minificationFilter = kCAFilterNearest
             imageView.layer.magnificationFilter = kCAFilterNearest
-            imageView.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double(angle) * (M_PI / 180.0)))
+            imageView.transform = CGAffineTransform.identity.rotated(by: CGFloat(Double(angle) * (Double.pi / 180.0)))
             let rect = imageView.bounds.applying(imageView.transform)
             let containerView = UIView(frame: CGRect(origin: .zero, size: rect.size))
             containerView.addSubview(imageView)

@@ -15,6 +15,7 @@
 		2807C2211E7F772200D798FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2807C21F1E7F772200D798FB /* LaunchScreen.storyboard */; };
 		2807C22C1E7F772200D798FB /* WTImagePickerControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C22B1E7F772200D798FB /* WTImagePickerControllerTests.m */; };
 		2807C2371E7F772200D798FB /* WTImagePickerControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2807C2361E7F772200D798FB /* WTImagePickerControllerUITests.m */; };
+		28CAAAD51EB1816D00B1CEAF /* WTAlbumDetailsControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAAAD41EB1816D00B1CEAF /* WTAlbumDetailsControlsView.swift */; };
 		28F159B01E7F87D300946058 /* WTAlbumDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159981E7F87D300946058 /* WTAlbumDetailsViewController.swift */; };
 		28F159B11E7F87D300946058 /* WTAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F159991E7F87D300946058 /* WTAlbumViewController.swift */; };
 		28F159B21E7F87D300946058 /* WTEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1599A1E7F87D300946058 /* WTEditingViewController.swift */; };
@@ -73,6 +74,7 @@
 		2807C2321E7F772200D798FB /* WTImagePickerControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WTImagePickerControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2807C2361E7F772200D798FB /* WTImagePickerControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTImagePickerControllerUITests.m; sourceTree = "<group>"; };
 		2807C2381E7F772200D798FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28CAAAD41EB1816D00B1CEAF /* WTAlbumDetailsControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumDetailsControlsView.swift; sourceTree = "<group>"; };
 		28F159981E7F87D300946058 /* WTAlbumDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumDetailsViewController.swift; sourceTree = "<group>"; };
 		28F159991E7F87D300946058 /* WTAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTAlbumViewController.swift; sourceTree = "<group>"; };
 		28F1599A1E7F87D300946058 /* WTEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTEditingViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				28F159A21E7F87D300946058 /* WTAlbumCell.swift */,
 				28F159A31E7F87D300946058 /* WTAlbumDetailsCell.swift */,
 				28F159AB1E7F87D300946058 /* WTPreviewCell.swift */,
+				28CAAAD41EB1816D00B1CEAF /* WTAlbumDetailsControlsView.swift */,
 				28F159AA1E7F87D300946058 /* WTEditingView.swift */,
 				28F159AC1E7F87D300946058 /* WTPreviewControlsView.swift */,
 				28F159A71E7F87D300946058 /* WTEditingControlsView.swift */,
@@ -399,6 +402,7 @@
 				28F159C41E7F87D300946058 /* WTSelectionIndicatorView.swift in Sources */,
 				28F159C01E7F87D300946058 /* WTEditingView.swift in Sources */,
 				28F159BE1E7F87D300946058 /* WTEditingCropOverlayView.swift in Sources */,
+				28CAAAD51EB1816D00B1CEAF /* WTAlbumDetailsControlsView.swift in Sources */,
 				28F159C11E7F87D300946058 /* WTPreviewCell.swift in Sources */,
 				28F159B31E7F87D300946058 /* WTImagePickerController.swift in Sources */,
 				2807C2131E7F772200D798FB /* main.m in Sources */,

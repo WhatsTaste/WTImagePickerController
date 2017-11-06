@@ -65,7 +65,7 @@ class WTAlbumDetailsControlsView: UIView {
         }
     }
     
-    // MARK: Public
+    // MARK: - Public
     
     func setHidden(_ hidden: Bool, animated: Bool) {
         let job = {
@@ -79,7 +79,7 @@ class WTAlbumDetailsControlsView: UIView {
         }
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func edit() {
         delegate?.albumDetailsControlsViewDidEdit(self)
@@ -93,7 +93,7 @@ class WTAlbumDetailsControlsView: UIView {
         delegate?.albumDetailsControlsViewDidFinish(self)
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTAlbumDetailsControlsViewDelegate?
     

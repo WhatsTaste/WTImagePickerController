@@ -84,7 +84,7 @@ class WTSelectionIndicatorView: UIControl {
         
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     override var tintColor: UIColor! {
         didSet {

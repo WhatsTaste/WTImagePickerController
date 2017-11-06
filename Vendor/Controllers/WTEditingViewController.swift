@@ -66,7 +66,7 @@ class WTEditingViewController: UIViewController, WTEditingViewDelegate {
         return .lightContent
     }
     
-    // MARK: WTEditingViewDelegate
+    // MARK: - WTEditingViewDelegate
     
     func editingViewDidCancel(_ view: WTEditingView) {
         _ = navigationController?.popViewController(animated: true)
@@ -80,9 +80,9 @@ class WTEditingViewController: UIViewController, WTEditingViewDelegate {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    // MARK: Private
+    // MARK: - Private
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTEditingViewControllerDelegate?
     

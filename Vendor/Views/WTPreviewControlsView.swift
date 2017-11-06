@@ -43,7 +43,7 @@ class WTPreviewControlsView: UIView {
         addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .top, relatedBy: .equal, toItem: editButton, attribute: .top, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint.init(item: originalActionView, attribute: .bottom, relatedBy: .equal, toItem: editButton, attribute: .bottom, multiplier: 1, constant: 0))
         let centerX = NSLayoutConstraint.init(item: originalActionView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
-        centerX.priority = UILayoutPriorityDefaultLow
+        centerX.priority = UILayoutPriority.defaultLow
         addConstraint(centerX)
         
         addConstraint(NSLayoutConstraint.init(item: doneBadgeActionView, attribute: .left, relatedBy: .greaterThanOrEqual, toItem: originalActionView, attribute: .right, multiplier: 1, constant: spacing))
@@ -67,11 +67,18 @@ class WTPreviewControlsView: UIView {
         }
     }
     
-    // MARK: Public
+    // MARK: - Public
     
     func setHidden(_ hidden: Bool, animated: Bool) {
         let job = {
-            let dy = hidden ? self.bounds.height : 0
+            var dy: CGFloat = 0
+            if hidden {
+                if #available(iOS 11.0, *) {
+                    dy = (self.superview?.safeAreaInsets.bottom ?? 0) + self.bounds.height
+                } else {
+                    dy = self.bounds.height
+                }
+            }
             self.layer.transform = CATransform3DMakeTranslation(0, dy, 0)
         }
         if animated {
@@ -81,7 +88,7 @@ class WTPreviewControlsView: UIView {
         }
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func edit() {
         delegate?.previewControlsViewDidEdit(self)
@@ -97,7 +104,7 @@ class WTPreviewControlsView: UIView {
         delegate?.previewControlsViewDidFinish(self)
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTPreviewControlsViewDelegate?
     

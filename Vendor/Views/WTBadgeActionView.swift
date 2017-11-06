@@ -42,7 +42,7 @@ class WTBadgeActionView: UIView {
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var badge: Int = 0 {
         didSet {

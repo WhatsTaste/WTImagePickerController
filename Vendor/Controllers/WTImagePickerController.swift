@@ -47,7 +47,7 @@ open class WTImagePickerController: UIViewController, WTAlbumViewControllerDeleg
         return topViewController
     }
     
-    // MARK: WTAlbumViewControllerDelegate
+    // MARK: - WTAlbumViewControllerDelegate
     
     func albumViewController(_ controller: WTAlbumViewController, didFinishWithImages images: [UIImage]) {
         delegate?.imagePickerController?(self, didFinishWithImages: images)
@@ -59,13 +59,13 @@ open class WTImagePickerController: UIViewController, WTAlbumViewControllerDeleg
         didCancelHandler?(self)
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
-    weak public var delegate: WTImagePickerControllerDelegate?
-    public var didFinishHandler: WTImagePickerControllerDidFinishHandler?
-    public var didCancelHandler: WTImagePickerControllerDidCancelHandler?
-    public var tintColor: UIColor?
-    public var pickLimit: Int = WTImagePickerControllerPickLimitDefault //Default is 0, which means no limit
+    @objc weak public var delegate: WTImagePickerControllerDelegate?
+    @objc public var didFinishHandler: WTImagePickerControllerDidFinishHandler?
+    @objc public var didCancelHandler: WTImagePickerControllerDidCancelHandler?
+    @objc public var tintColor: UIColor?
+    @objc public var pickLimit: Int = WTImagePickerControllerPickLimitDefault //Default is 0, which means no limit
     
     lazy private var contentViewController: UINavigationController = {
         let tintColor = self.tintColor ?? self.view.tintColor
@@ -75,13 +75,13 @@ open class WTImagePickerController: UIViewController, WTAlbumViewControllerDeleg
         rootViewController.pickLimit = self.pickLimit
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.isToolbarHidden = true
-        navigationController.navigationBar.isTranslucent = true
-        navigationController.navigationBar.tintColor = tintColor
+        navigationController.navigationBar.isTranslucent = false
+//        navigationController.navigationBar.tintColor = tintColor
         return navigationController
     }()
 }
 
-// MARK: Localization
+// MARK: - Localization
 
 public extension NSObject {
     func localizedString(_ key: String) -> String {

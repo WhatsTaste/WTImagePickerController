@@ -44,7 +44,7 @@ public class WTSectorProgressView: UIView {
         path.fill()
     }
     
-    // MARK: Public
+    // MARK: - Public
     
     public func setProgress(_ progress: CGFloat, animated: Bool) {
         if animated {
@@ -59,7 +59,7 @@ public class WTSectorProgressView: UIView {
         }
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func changeProgress() {
         guard let target = targetProgress else {
@@ -74,7 +74,7 @@ public class WTSectorProgressView: UIView {
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var progress: CGFloat = 0 {
         didSet {

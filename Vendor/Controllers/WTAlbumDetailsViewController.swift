@@ -17,7 +17,7 @@ protocol WTAlbumDetailsViewControllerDelegate: class {
 private let reuseIdentifier = "Cell"
 private let columnNumber = 4
 private let margin: CGFloat = 2
-private let controlsViewHeight:CGFloat = 44
+private let controlsViewHeight: CGFloat = 44
 
 class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PHPhotoLibraryChangeObserver, WTAlbumDetailsControlsViewDelegate, WTPreviewViewControllerDelegate, WTEditingViewControllerDelegate {
 
@@ -56,7 +56,11 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         view.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .left, relatedBy: .equal, toItem: collectionView, attribute: .left, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint.init(item: collectionView, attribute: .right, relatedBy: .equal, toItem: controlsView, attribute: .right, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        if #available(iOS 11.0, *) {
+            view.addConstraint(NSLayoutConstraint.init(item: view.safeAreaLayoutGuide, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        } else {
+            view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        }
         controlsView.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: controlsViewHeight))
         
         view.addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
@@ -100,7 +104,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -126,7 +130,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         }
         let flag = selectedIdentifiers.contains(asset.localIdentifier)
         cell.checked = flag
-        cell.selectHandler = { [weak self] (sender) in
+        cell.selectHandler = { [weak self] in
             if let index = self?.selectedIdentifiers.index(of: asset.localIdentifier) {
 //                print(#function + "\(index)")
                 self?.selectedIdentifiers.remove(at: index)
@@ -138,7 +142,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
@@ -163,14 +167,14 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
-    // MARK: UICollectionViewDelegateFlowLayout
+    // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size: CGFloat = floor((collectionView.bounds.width - margin * CGFloat((columnNumber - 1))) / CGFloat(columnNumber))
         return CGSize(width: size, height: size)
     }
     
-    // MARK: PHPhotoLibraryChangeObserver
+    // MARK: - PHPhotoLibraryChangeObserver
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         
@@ -208,13 +212,13 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         }
     }
     
-    // MARK: UIScrollViewDelegate
+    // MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateCachedAssets()
     }
     
-    // MARK: WTAlbumDetailsControlsViewDelegate
+    // MARK: - WTAlbumDetailsControlsViewDelegate
     
     func albumDetailsControlsViewDidEdit(_ view: WTAlbumDetailsControlsView) {
         guard selectedIdentifiers.count > 0 else {
@@ -269,7 +273,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         done()
     }
     
-    // MARK: WTPreviewViewControllerDelegate
+    // MARK: - WTPreviewViewControllerDelegate
     
     func previewViewControllerDidFinish(_ controller: WTPreviewViewController) {
         done()
@@ -305,13 +309,13 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         appleResult(result, asset: asset)
     }
     
-    // MARK: WTEditingViewControllerDelegate
+    // MARK: - WTEditingViewControllerDelegate
     
     func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset) {
         appleResult(result, asset: asset)
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func cancel() {
         self.delegate?.albumDetailsViewControllerDidCancel(self)
@@ -360,10 +364,12 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
                         
                         // Callback when finished
                         if counter == assets.count {
-                            self!.view.isUserInteractionEnabled = true
-                            self!.visualEffectView.isHidden = true
-                            self!.activityIndicatorView.stopAnimating()
-                            self!.delegate?.albumDetailsViewController(self!, didFinishWithImages: images)
+                            DispatchQueue.main.async {
+                                self!.view.isUserInteractionEnabled = true
+                                self!.visualEffectView.isHidden = true
+                                self!.activityIndicatorView.stopAnimating()
+                                self!.delegate?.albumDetailsViewController(self!, didFinishWithImages: images)
+                            }
                         }
                     }
                 }
@@ -462,7 +468,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTAlbumDetailsViewControllerDelegate?
     public var tintColor: UIColor? {
@@ -474,8 +480,8 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
     
     lazy private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = CGFloat(margin)
-        layout.minimumInteritemSpacing = CGFloat(margin)
+        layout.minimumLineSpacing = margin
+        layout.minimumInteritemSpacing = margin
         layout.sectionInset = .zero
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false

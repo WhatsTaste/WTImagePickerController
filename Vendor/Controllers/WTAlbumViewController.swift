@@ -15,7 +15,7 @@ protocol WTAlbumViewControllerDelegate: class {
 }
 
 private let reuseIdentifier = "Cell"
-private let preferedCollectionIdentifierKey = "preferedCollectionIdentifierKey"
+private let preferredCollectionIdentifierKey = "preferredCollectionIdentifierKey"
 
 class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver, WTAlbumDetailsViewControllerDelegate {
 
@@ -31,6 +31,7 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
         // Do any additional setup after loading the view.
         
         edgesForExtendedLayout = .all
+        
         navigationItem.title = localizedString("Photos")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: localizedString("Cancel"), style: .plain, target: self, action: #selector(cancel))
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
@@ -98,11 +99,11 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
         destinationViewController.pickLimit = pickLimit
         navigationController?.pushViewController(destinationViewController, animated: true)
         
-        UserDefaults.standard.set(collection.localIdentifier, forKey: preferedCollectionIdentifierKey)
+        UserDefaults.standard.set(collection.localIdentifier, forKey: preferredCollectionIdentifierKey)
         UserDefaults.standard.synchronize()
     }
 
-    // MARK: PHPhotoLibraryChangeObserver
+    // MARK: - PHPhotoLibraryChangeObserver
     
     public func photoLibraryDidChange(_ changeInstance: PHChange) {
         // Change notifications may be made on a background queue. Re-dispatch to the
@@ -121,7 +122,7 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
         }
     }
     
-    // MARK: WTAlbumDetailsViewControllerDelegate
+    // MARK: - WTAlbumDetailsViewControllerDelegate
     
     func albumDetailsViewController(_ controller: WTAlbumDetailsViewController, didFinishWithImages images: [UIImage]) {
         delegate?.albumViewController(self, didFinishWithImages: images)
@@ -131,13 +132,13 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
         delegate?.albumViewControllerDidCancel(self)
     }
 
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func cancel() {
         self.delegate?.albumViewControllerDidCancel(self)
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTAlbumViewControllerDelegate?
     public var tintColor: UIColor?
@@ -145,12 +146,12 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
     
     private var smartAlbums: PHFetchResult<PHAssetCollection>! {
         didSet {
-            var preferedCollection: PHAssetCollection?
-            let preferedCollectionIdentifier = UserDefaults.standard.string(forKey: preferedCollectionIdentifierKey)
+            var preferredCollection: PHAssetCollection?
+            let preferredCollectionIdentifier = UserDefaults.standard.string(forKey: preferredCollectionIdentifierKey)
             for i in 0 ..< smartAlbums.count {
                 let collection = smartAlbums.object(at: i)
-                if collection.localIdentifier == preferedCollectionIdentifier {
-                    preferedCollection = collection
+                if collection.localIdentifier == preferredCollectionIdentifier {
+                    preferredCollection = collection
                 }
 //                print("\(i) \(collection)")
                 guard collection.assetCollectionSubtype != .smartAlbumAllHidden else {
@@ -167,10 +168,10 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
                 }
             }
             
-            guard preferedCollection != nil else {
+            guard preferredCollection != nil else {
                 return
             }
-            let destinationViewController = WTAlbumDetailsViewController(collection: preferedCollection!)
+            let destinationViewController = WTAlbumDetailsViewController(collection: preferredCollection!)
             destinationViewController.delegate = self
             destinationViewController.tintColor = tintColor
             destinationViewController.pickLimit = pickLimit

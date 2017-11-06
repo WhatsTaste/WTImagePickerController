@@ -117,7 +117,7 @@ class WTEditingCropOverlayView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Public
+    // MARK: - Public
     
     public func setGridHidden(_ hidden: Bool, animated: Bool) {
         gridHidden = hidden
@@ -138,7 +138,7 @@ class WTEditingCropOverlayView: UIView {
         }
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     private func addLineView() -> UIView {
         let view = UIView(frame: .zero)
@@ -259,7 +259,7 @@ class WTEditingCropOverlayView: UIView {
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var gridHidden: Bool = false {
         didSet {

@@ -57,7 +57,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
         progressView.isHidden = true
     }
     
-    // MARK: UIScrollViewDelegate
+    // MARK: - UIScrollViewDelegate
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return contentImageView
@@ -76,7 +76,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
         }
     }
     
-    // MARK: UIGestureRecognizerDelegate
+    // MARK: - UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let location = touch.location(in: contentView)
@@ -85,7 +85,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
         return contentButton.isHidden || !inside
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func singleTapAction(_ sender: UITapGestureRecognizer) {
         singleTapHandler?()
@@ -131,7 +131,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var representedAssetIdentifier: String!
     public var singleTapHandler: WTPreviewCellTapHandler?
@@ -143,16 +143,20 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
         imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFit
         imageView.imageDidSetHandler = { [weak self] (image) in
-            if self == nil {
+            guard self != nil else {
                 return
             }
-            
+            guard let someImage = image else {
+                return
+            }
             let bounds = self!.contentView.bounds.insetBy(dx: previewViewControllerMargin, dy: 0)
-            let imageSize = image?.size ?? CGSize.zero
-            var scale: CGFloat = min(bounds.width / imageSize.width, bounds.height / imageSize.height)
-            scale = min(scale, 1)
-            let scaledImageSize = CGSize(width: floor(imageSize.width * scale), height: floor(imageSize.height * scale))
+            let imageSize = someImage.size
+            let scale: CGFloat = bounds.width / imageSize.width
+            let factor: CGFloat = imageSize.height / imageSize.width
+            let scaledImageSize = CGSize(width: bounds.width, height: floor(bounds.width * factor))
+//            print("imageSize: \(imageSize) scale: \(scale) factor: \(factor) scaledImageSize: \(scaledImageSize)")
             self!.contentScrollView.minimumZoomScale = scale
+            self!.contentScrollView.maximumZoomScale = self!.contentScrollView.minimumZoomScale * 3
             self!.contentScrollView.zoomScale = self!.contentScrollView.minimumZoomScale
             self!.contentScrollView.contentSize = scaledImageSize
 
@@ -193,7 +197,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
     lazy public private(set) var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: self.bounds.insetBy(dx: previewViewControllerMargin, dy: previewViewControllerMargin))
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = UIColor.black
+        scrollView.backgroundColor = UIColor.clear
         scrollView.isMultipleTouchEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -202,7 +206,6 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
         scrollView.scrollsToTop = false
         scrollView.delaysContentTouches = false
         scrollView.canCancelContentTouches = true
-        scrollView.maximumZoomScale = 2
         scrollView.delegate = self
         return scrollView
     }()
@@ -228,7 +231,7 @@ class WTPreviewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecogn
     
     lazy private var timer: DispatchSourceTimer = {
         let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
-        timer.scheduleRepeating(deadline: .now(), interval: .seconds(1))
+        timer.schedule(deadline: .now(), repeating: .seconds(1))
         timer.setEventHandler { [weak self] in
             self?.progressView.isHidden = false
             let progress = CGFloat(arc4random_uniform(10)) / 10
@@ -247,7 +250,7 @@ class WTPreviewCellImageView: UIImageView {
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var imageDidSetHandler: WTPreviewCellImageViewHandler?
 }

@@ -48,7 +48,7 @@ class WTEditingControlsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func cancel() {
         delegate?.editingControlsViewDidCancel(self)
@@ -62,7 +62,7 @@ class WTEditingControlsView: UIView {
         delegate?.editingControlsViewDidReset(self)
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTEditingControlsViewDelegate?
     public var resetButtonEnabled: Bool {

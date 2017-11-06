@@ -29,8 +29,8 @@ class WTAlbumCell: UITableViewCell {
         contentView.addConstraint(NSLayoutConstraint.init(item: subtitleLabel, attribute: .centerY, relatedBy: .equal, toItem: titleLabel, attribute: .centerY, multiplier: 1, constant: 0))
         contentView.addConstraint(NSLayoutConstraint.init(item: contentView, attribute: .right, relatedBy: .equal, toItem: subtitleLabel, attribute: .right, multiplier: 1, constant: 10))
         
-        titleLabel.setContentHuggingPriority(subtitleLabel.contentHuggingPriority(for: .horizontal) + 1, for: .horizontal)
-        titleLabel.setContentCompressionResistancePriority(subtitleLabel.contentCompressionResistancePriority(for: .horizontal) + 1, for: .horizontal)
+        titleLabel.setContentHuggingPriority(UILayoutPriority(rawValue: subtitleLabel.contentHuggingPriority(for: .horizontal).rawValue + UILayoutPriority.RawValue(1)), for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: subtitleLabel.contentCompressionResistancePriority(for: .horizontal).rawValue + UILayoutPriority.RawValue(1)), for: .horizontal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,7 +45,7 @@ class WTAlbumCell: UITableViewCell {
         subtitleLabel.text = nil
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var representedAssetIdentifier: String!
     

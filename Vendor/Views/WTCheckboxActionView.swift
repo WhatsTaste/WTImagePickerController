@@ -48,7 +48,7 @@ class WTCheckboxActionView: UIControl {
         }
     }
     
-    // MARK: Private
+    // MARK: - Private
 
     override var isSelected: Bool {
         didSet {

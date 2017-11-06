@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import CoreGraphics
 
 protocol WTEditingViewDelegate: class {
     func editingViewDidCancel(_ view: WTEditingView)
@@ -35,7 +34,11 @@ class WTEditingView: UIView, WTEditingControlsViewDelegate, WTEditingCropViewDel
         self.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .left, relatedBy: .equal, toItem: cropView, attribute: .left, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .right, relatedBy: .equal, toItem: cropView, attribute: .right, multiplier: 1, constant: 0))
         self.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .top, relatedBy: .equal, toItem: cropView, attribute: .bottom, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        if #available(iOS 11.0, *) {
+            self.addConstraint(NSLayoutConstraint.init(item: self.safeAreaLayoutGuide, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        } else {
+            self.addConstraint(NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        }
         controlsView.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: controlsViewHeight))
     }
     
@@ -43,7 +46,7 @@ class WTEditingView: UIView, WTEditingControlsViewDelegate, WTEditingCropViewDel
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: WTEditingControlsViewDelegate
+    // MARK: - WTEditingControlsViewDelegate
     
     func editingControlsViewDidCancel(_ view: WTEditingControlsView) {
         delegate?.editingViewDidCancel(self)
@@ -69,7 +72,7 @@ class WTEditingView: UIView, WTEditingControlsViewDelegate, WTEditingCropViewDel
         controlsView.resetButtonEnabled = false
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTEditingViewDelegate?
     lazy public private(set) var cropView: WTEditingCropView = {

@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 protocol WTPreviewViewControllerDelegate: class {
-    func previewViewControllerDidFinish(_ controller: WTPreviewViewController)//, didFinishWithIdentifiers identifiers: [String])
+    func previewViewControllerDidFinish(_ controller: WTPreviewViewController)
     func previewViewController(_ controller: WTPreviewViewController, canSelectAsset asset: PHAsset) -> Bool
     func previewViewController(_ controller: WTPreviewViewController, didSelectAsset asset: PHAsset)
     func previewViewController(_ controller: WTPreviewViewController, didDeselectAsset asset: PHAsset)
@@ -42,7 +42,7 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         edgesForExtendedLayout = .all
         automaticallyAdjustsScrollViewInsets = false
         
-        navigationItem.title = localizedString("Preiview")
+        navigationItem.title = localizedString("Preview")
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationIndicatorView)
         
         view.backgroundColor = UIColor.white
@@ -56,8 +56,11 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         
         view.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .right, relatedBy: .equal, toItem: controlsView, attribute: .right, multiplier: 1, constant: 0))
-//        view.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        if #available(iOS 11.0, *) {
+            view.addConstraint(NSLayoutConstraint.init(item: view.safeAreaLayoutGuide, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        } else {
+            view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .bottom, relatedBy: .equal, toItem: controlsView, attribute: .bottom, multiplier: 1, constant: 0))
+        }
         controlsView.addConstraint(NSLayoutConstraint.init(item: controlsView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: controlsViewHeight))
         
         updateSelections(atIndex: index)
@@ -82,11 +85,23 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return statusBarHidden
     }
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -99,6 +114,7 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         // Configure the cell
         let asset = assets[indexPath.item]
 //        print(#function + "\(indexPath.item):" + asset.localIdentifier)
+        cell.backgroundColor = view.backgroundColor
         cell.representedAssetIdentifier = asset.localIdentifier
         cell.singleTapHandler = { [weak self] in
             if self == nil {
@@ -172,7 +188,7 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
-    // MARK: UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let someCell = cell as? WTPreviewCell {
@@ -180,7 +196,7 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
-    // MARK: UICollectionViewDelegateFlowLayout
+    // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = floor(collectionView.bounds.width)
@@ -259,7 +275,7 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         delegate?.previewViewControllerDidFinish(self)
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func navigationSelectAction(_ sender: WTSelectionIndicatorView) {
         if let indexPath = currentIndexPath() {
@@ -351,10 +367,13 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         statusBarHidden = !statusBarHidden
         setNeedsStatusBarAppearanceUpdate()
         navigationController?.setNavigationBarHidden(statusBarHidden, animated: true)
+        view.backgroundColor = statusBarHidden ? UIColor.black : UIColor.white
         controlsView.setHidden(statusBarHidden, animated: true)
+        collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTPreviewViewControllerDelegate?
     public var tintColor: UIColor? {

@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIImage {
-    func fitSize(_ size: CGSize) -> UIImage {
+    @objc func fitSize(_ size: CGSize) -> UIImage {
         guard self.cgImage != nil else {
             return self
         }
@@ -28,14 +28,14 @@ public extension UIImage {
         return image!
     }
     
-    func hasAlpha() -> Bool {
+    @objc func hasAlpha() -> Bool {
         if let alphaInfo = self.cgImage?.alphaInfo {
             return alphaInfo == .first || alphaInfo == .last || alphaInfo == .premultipliedFirst || alphaInfo == .premultipliedLast
         }
         return false
     }
     
-    func applyingColor(_ color: UIColor) -> UIImage? {
+    @objc func applyingColor(_ color: UIColor) -> UIImage? {
         guard self.cgImage != nil else {
             return nil
         }
@@ -55,7 +55,8 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
-    func applyingAlpha(_ alpha: CGFloat) -> UIImage? {
+    
+    @objc func applyingAlpha(_ alpha: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero, blendMode: .normal, alpha: alpha)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -63,7 +64,7 @@ public extension UIImage {
         return image
     }
     
-    func croppingWithFrame(_ frame: CGRect, angle: Int) -> UIImage? {
+    @objc func croppingWithFrame(_ frame: CGRect, angle: Int) -> UIImage? {
         var image: UIImage?
         UIGraphicsBeginImageContextWithOptions(frame.size, !self.hasAlpha(), self.scale)
         let context = UIGraphicsGetCurrentContext()
@@ -93,7 +94,7 @@ public extension UIImage {
         return UIImage(cgImage: image!.cgImage!, scale: UIScreen.main.scale, orientation: .up)
     }
     
-    class func cancelImage() -> UIImage? {
+    @objc class func cancelImage() -> UIImage? {
         var image: UIImage?
         
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 16, height: 16), false, 0)
@@ -115,7 +116,7 @@ public extension UIImage {
         return image
     }
     
-    class func doneImage() -> UIImage? {
+    @objc class func doneImage() -> UIImage? {
         var image: UIImage?
         
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 17, height: 14), false, 0)
@@ -131,7 +132,7 @@ public extension UIImage {
         return image
     }
     
-    class func rotateImage() -> UIImage? {
+    @objc class func rotateImage() -> UIImage? {
         var image: UIImage?
         
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 18, height: 21), false, 0)
@@ -159,7 +160,7 @@ public extension UIImage {
         return image
     }
     
-    class func resetImage() -> UIImage? {
+    @objc class func resetImage() -> UIImage? {
         var image: UIImage?
         
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 22, height: 18), false, 0)

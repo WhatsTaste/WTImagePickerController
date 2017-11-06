@@ -146,7 +146,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         checkForCanReset()
     }
     
-    // MARK: UIScrollViewDelegate
+    // MARK: - UIScrollViewDelegate
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return backgroundContainerView
@@ -191,7 +191,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         }
     }
     
-    // MARK: UIGestureRecognizerDelegate
+    // MARK: - UIGestureRecognizerDelegate
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer != panGestureRecognizer {
@@ -216,7 +216,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         return true
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     private func matchForegroundToBackground() {
         if disableForgroundMatching || backgroundContainerView.superview == nil {
@@ -783,7 +783,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         }
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     weak public var delegate: WTEditingCropViewDelegate?
     public var insets: UIEdgeInsets = UIEdgeInsetsMake(0, 0, rotateButtonHeight + rotateButtonTop + rotateButtonBottom, 0)
@@ -1052,7 +1052,7 @@ class WTEditingCropScrollView: UIScrollView {
         touchesEndedHandler?()
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var touchesBeganHandler: WTEditingCropScrollViewHandler?
     var touchesEndedHandler: WTEditingCropScrollViewHandler?

@@ -40,7 +40,7 @@ class WTBadgeView: UIView {
         context?.restoreGState()
         
         let attributes = self.attributes ?? defaultAttributes()
-        let font: UIFont = attributes[NSFontAttributeName] as! UIFont
+        let font: UIFont = attributes[NSAttributedStringKey.font] as! UIFont
 //        print(#function + ":\(badge)")
         badge.draw(in: CGRect(origin: CGPoint(x: rect.minX, y: rect.minY + (rect.height - font.pointSize + font.descender) * 0.5), size: rect.size), withAttributes: attributes)
     }
@@ -48,7 +48,7 @@ class WTBadgeView: UIView {
     override var intrinsicContentSize: CGSize {
 //        print(#function + "\(badge)")
         let attributes = self.attributes ?? defaultAttributes()
-        var size = badge.size(attributes: attributes)
+        var size = badge.size(withAttributes: attributes)
 //        print(#function + "Before:\(size)")
         size.width += insets.left + insets.right
         size.height += insets.top + insets.bottom
@@ -65,13 +65,13 @@ class WTBadgeView: UIView {
         }
     }
     
-    // MARK: Private
+    // MARK: - Private
 
-    func defaultAttributes() -> [String: Any] {
-        return [NSFontAttributeName: UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.white, NSParagraphStyleAttributeName: self.style]
+    func defaultAttributes() -> [NSAttributedStringKey: Any] {
+        return [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12), NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.paragraphStyle: self.style]
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var badge: String = String() {
         didSet {
@@ -88,7 +88,7 @@ class WTBadgeView: UIView {
         }
     }
     
-    public var attributes: [String : Any]? {
+    public var attributes: [NSAttributedStringKey : Any]? {
         didSet {
             invalidateIntrinsicContentSize()
             setNeedsDisplay()

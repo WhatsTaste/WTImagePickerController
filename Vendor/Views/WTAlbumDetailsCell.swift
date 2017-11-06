@@ -47,20 +47,20 @@ class WTAlbumDetailsCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
     }
     
-    // MARK: UIGestureRecognizerDelegate
+    // MARK: - UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let location = touch.location(in: gestureRecognizer.view!)
         return indicatorView.frame.contains(location)
     }
     
-    // MARK: Private
+    // MARK: - Private
     
     @objc private func selectAction(_ sender: UITapGestureRecognizer) {
         selectHandler?()
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     public var representedAssetIdentifier: String!
     

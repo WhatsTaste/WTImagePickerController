@@ -41,7 +41,7 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         
         edgesForExtendedLayout = .all
         navigationItem.title = collection.localizedTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: localizedString("Cancel"), style: .plain, target: self, action: #selector(cancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: WTIPLocalizedString("Cancel"), style: .plain, target: self, action: #selector(cancel))
         
         view.backgroundColor = UIColor.white
         view.addSubview(collectionView)
@@ -399,9 +399,9 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
     }
     
     func alertForPickLimit() {
-        let title = String(format: localizedString("Select a maximum of %ld photos"), pickLimit)
+        let title = String(format: WTIPLocalizedString("Select a maximum of %ld photos"), pickLimit)
         let controller = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        controller.addAction(UIAlertAction(title: localizedString("OK"), style: .default, handler: nil))
+        controller.addAction(UIAlertAction(title: WTIPLocalizedString("OK"), style: .default, handler: nil))
         present(controller, animated: true, completion: nil)
     }
     

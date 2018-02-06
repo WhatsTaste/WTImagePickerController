@@ -101,7 +101,7 @@ class WTEditingControlsView: UIView {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.lightGray, for: .disabled)
-        button.setTitle(self.localizedString("Reset"), for: .normal)
+        button.setTitle(self.WTIPLocalizedString("Reset"), for: .normal)
         button.addTarget(self, action: #selector(reset), for: .touchUpInside)
         button.isEnabled = false
         return button

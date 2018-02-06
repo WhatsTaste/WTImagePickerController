@@ -122,7 +122,7 @@ class WTPreviewControlsView: UIView {
         button.backgroundColor = UIColor.clear
         button.contentHorizontalAlignment = .left
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.setTitle(self.localizedString("Edit"), for: .normal)
+        button.setTitle(self.WTIPLocalizedString("Edit"), for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(edit), for: .touchUpInside)
         return button
@@ -136,7 +136,7 @@ class WTPreviewControlsView: UIView {
         view.tintColor = self.tintColor
         view.textColor = UIColor.black
         view.indicatorView.style = .checkbox
-        view.contentLabel.text = self.localizedString("Original")
+        view.contentLabel.text = self.WTIPLocalizedString("Original")
         view.addTarget(self, action: #selector(selectOriginal(_:)), for: .touchUpInside)
         return view
     }()
@@ -147,7 +147,7 @@ class WTPreviewControlsView: UIView {
         view.backgroundColor = UIColor.clear
         view.tintColor = self.tintColor
         view.contentButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        view.contentButton.setTitle(self.localizedString("Done"), for: .normal)
+        view.contentButton.setTitle(self.WTIPLocalizedString("Done"), for: .normal)
         view.contentButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         return view
     }()

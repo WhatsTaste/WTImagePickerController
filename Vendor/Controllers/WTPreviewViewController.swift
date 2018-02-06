@@ -18,9 +18,9 @@ protocol WTPreviewViewControllerDelegate: class {
     func previewViewController(_ controller: WTPreviewViewController, didEditWithResult result: WTEditingResult, forAsset asset: PHAsset)
 }
 
-public let previewViewControllerMargin: CGFloat = 10
+public let WTPreviewViewControllerMargin: CGFloat = 10
 private let reuseIdentifier = "Cell"
-private let controlsViewHeight:CGFloat = 44
+private let controlsViewHeight: CGFloat = 44
 
 class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, WTEditingViewControllerDelegate, WTPreviewControlsViewDelegate {
     
@@ -42,15 +42,15 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         edgesForExtendedLayout = .all
         automaticallyAdjustsScrollViewInsets = false
         
-        navigationItem.title = localizedString("Preview")
+        navigationItem.title = WTIPLocalizedString("Preview")
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationIndicatorView)
         
         view.backgroundColor = UIColor.white
         view.addSubview(collectionView)
         view.addSubview(controlsView)
         
-        view.addConstraint(NSLayoutConstraint.init(item: collectionView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: -previewViewControllerMargin))
-        view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .right, relatedBy: .equal, toItem: collectionView, attribute: .right, multiplier: 1, constant: -previewViewControllerMargin))
+        view.addConstraint(NSLayoutConstraint.init(item: collectionView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: -WTPreviewViewControllerMargin))
+        view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .right, relatedBy: .equal, toItem: collectionView, attribute: .right, multiplier: 1, constant: -WTPreviewViewControllerMargin))
         view.addConstraint(NSLayoutConstraint.init(item: collectionView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0))
         
@@ -317,9 +317,9 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
             }
             
             if !original {
-                controlsView.originalActionView.contentLabel.text = localizedString("Original")
+                controlsView.originalActionView.contentLabel.text = WTIPLocalizedString("Original")
             } else {
-                controlsView.originalActionView.contentLabel.text = localizedString("Original") + "--"
+                controlsView.originalActionView.contentLabel.text = WTIPLocalizedString("Original") + "--"
                 PHImageManager.default().requestOriginalImage(for: someAsset, resultHandler: { [weak self] (image, _) in
                     DispatchQueue.global().async {
                         guard self != nil else {
@@ -347,7 +347,7 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
                                 guard self != nil else {
                                     return
                                 }
-                                self!.controlsView.originalActionView.contentLabel.text = self!.localizedString("Original") + result
+                                self!.controlsView.originalActionView.contentLabel.text = self!.WTIPLocalizedString("Original") + result
                             }
                         }
                     }

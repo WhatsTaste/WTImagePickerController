@@ -12,7 +12,7 @@ public typealias WTImagePickerControllerDidFinishHandler = (_ picker: WTImagePic
 public typealias WTImagePickerControllerDidCancelHandler = (_ picker: WTImagePickerController) -> Void
 
 public let WTImagePickerControllerDisableAlphaComponent: CGFloat = 0.3
-private let WTImagePickerControllerPickLimitDefault: Int = 0
+private let pickLimitDefault: Int = 0
 
 @objc public protocol WTImagePickerControllerDelegate: NSObjectProtocol {
     @objc optional func imagePickerController(_ picker: WTImagePickerController, didFinishWithImages images: [UIImage])
@@ -65,7 +65,7 @@ open class WTImagePickerController: UIViewController, WTAlbumViewControllerDeleg
     @objc public var didFinishHandler: WTImagePickerControllerDidFinishHandler?
     @objc public var didCancelHandler: WTImagePickerControllerDidCancelHandler?
     @objc public var tintColor: UIColor?
-    @objc public var pickLimit: Int = WTImagePickerControllerPickLimitDefault //Default is 0, which means no limit
+    @objc public var pickLimit: Int = pickLimitDefault //Default is 0, which means no limit
     
     lazy private var contentViewController: UINavigationController = {
         let tintColor = self.tintColor ?? self.view.tintColor
@@ -84,7 +84,7 @@ open class WTImagePickerController: UIViewController, WTAlbumViewControllerDeleg
 // MARK: - Localization
 
 public extension NSObject {
-    func localizedString(_ key: String) -> String {
+    func WTIPLocalizedString(_ key: String) -> String {
         return NSLocalizedString(key, tableName: "WTImagePickerController", bundle: Bundle(path: Bundle.main.path(forResource: "WTImagePickerController", ofType: "bundle")!)!, value: "", comment: "")
     }
 }

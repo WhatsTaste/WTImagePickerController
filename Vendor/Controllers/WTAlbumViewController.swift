@@ -32,8 +32,8 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
         
         edgesForExtendedLayout = .all
         
-        navigationItem.title = localizedString("Photos")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: localizedString("Cancel"), style: .plain, target: self, action: #selector(cancel))
+        navigationItem.title = WTIPLocalizedString("Photos")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: WTIPLocalizedString("Cancel"), style: .plain, target: self, action: #selector(cancel))
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
         userCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
         

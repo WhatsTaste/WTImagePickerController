@@ -111,7 +111,7 @@ class WTAlbumDetailsControlsView: UIView {
         button.backgroundColor = UIColor.clear
         button.contentHorizontalAlignment = .left
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.setTitle(self.localizedString("Edit"), for: .normal)
+        button.setTitle(self.WTIPLocalizedString("Edit"), for: .normal)
         button.setTitleColor(self.tintColor, for: .normal)
         button.setTitleColor(button.titleColor(for: .normal)?.withAlphaComponent(WTImagePickerControllerDisableAlphaComponent), for: .disabled)
         button.addTarget(self, action: #selector(edit), for: .touchUpInside)
@@ -124,7 +124,7 @@ class WTAlbumDetailsControlsView: UIView {
         button.backgroundColor = UIColor.clear
         button.contentHorizontalAlignment = .left
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.setTitle(self.localizedString("Preview"), for: .normal)
+        button.setTitle(self.WTIPLocalizedString("Preview"), for: .normal)
         button.setTitleColor(self.tintColor, for: .normal)
         button.setTitleColor(button.titleColor(for: .normal)?.withAlphaComponent(WTImagePickerControllerDisableAlphaComponent), for: .disabled)
         button.addTarget(self, action: #selector(preview), for: .touchUpInside)
@@ -137,7 +137,7 @@ class WTAlbumDetailsControlsView: UIView {
         view.backgroundColor = UIColor.clear
         view.tintColor = self.tintColor
         view.contentButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        view.contentButton.setTitle(self.localizedString("Done"), for: .normal)
+        view.contentButton.setTitle(self.WTIPLocalizedString("Done"), for: .normal)
         view.contentButton.addTarget(self, action: #selector(done), for: .touchUpInside)
         return view
     }()

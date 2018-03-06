@@ -59,10 +59,14 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         addSubview(rotateButton)
         
         //scrollView
-//        self.addConstraint(NSLayoutConstraint.init(item: scrollView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0))
-//        self.addConstraint(NSLayoutConstraint.init(item: self, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1, constant: 0))
-//        self.addConstraint(NSLayoutConstraint.init(item: scrollView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
-//        self.addConstraint(NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint.init(item: scrollView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint.init(item: self, attribute: .right, relatedBy: .equal, toItem: scrollView, attribute: .right, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint.init(item: scrollView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
+        if #available(iOS 11.0, *) {
+            self.addConstraint(NSLayoutConstraint.init(item: self.safeAreaLayoutGuide, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0))
+        } else {
+            self.addConstraint(NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0))
+        }
 
         //backgroundContainerView
 //        backgroundContainerLeftConstraint = (NSLayoutConstraint.init(item: backgroundContainerView, attribute: .left, relatedBy: .equal, toItem: scrollView, attribute: .left, multiplier: 1, constant: 0))
@@ -120,30 +124,6 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-//        print(self.frame)
-        if superview == nil {
-            return
-        }
-        layoutInitialImage()
-        
-        if restoreAngle != 0 {
-            applyAngle(restoreAngle)
-            angle = restoreAngle
-            restoreAngle = 0
-            cropBoxLastEditedAngle = angle
-        }
-        
-        if !restoreImageCropFrame.isEmpty {
-            imageCropframe = restoreImageCropFrame
-            restoreImageCropFrame = .zero
-            captureStateForImageRotation()
-        }
-        
-        checkForCanReset()
     }
     
     // MARK: - UIScrollViewDelegate
@@ -216,6 +196,34 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         return true
     }
     
+    // MARK: - Public
+    
+    public func layout() {
+        guard !completed else {
+            return
+        }
+        completed = true
+        
+        layoutInitialImage()
+        
+        if restoreAngle != 0 {
+            applyAngle(restoreAngle)
+            angle = restoreAngle
+            restoreAngle = 0
+            cropBoxLastEditedAngle = angle
+        }
+        
+        if !restoreImageCropFrame.isEmpty {
+            imageCropframe = restoreImageCropFrame
+            restoreImageCropFrame = .zero
+            captureStateForImageRotation()
+        }
+        
+        moveCroppedContentToCenterAnimated(false)
+        
+        checkForCanReset()
+    }
+    
     // MARK: - Private
     
     private func matchForegroundToBackground() {
@@ -249,31 +257,63 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         
         switch tappedEdge {
         case .left:
-            frame.origin.x = originFrame.minX + dx
-            frame.size.width = originFrame.width - dx
+            let newWidth = originFrame.width - dx
+            let newHeight = originFrame.height
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.origin.x = originFrame.minX + dx
+                frame.size.width = originFrame.width - dx
+            }
         case .right:
-            frame.size.width = originFrame.width + dx
+            let newWidth = originFrame.width + dx
+            let newHeight = originFrame.height
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.size.width = originFrame.width + dx
+            }
         case .bottom:
-            frame.size.height = originFrame.height + dy
+            let newWidth = originFrame.width
+            let newHeight = originFrame.height + dy
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.size.height = originFrame.height + dy
+            }
         case .top:
-            frame.origin.y = originFrame.minY + dy
-            frame.size.height = originFrame.height - dy
+            let newWidth = originFrame.width
+            let newHeight = originFrame.height - dy
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.origin.y = originFrame.minY + dy
+                frame.size.height = originFrame.height - dy
+            }
         case .topLeft:
-            frame.origin.x = originFrame.minX + dx
-            frame.size.width = originFrame.width - dx
-            frame.origin.y = originFrame.minY + dy
-            frame.size.height = originFrame.height - dy
+            let newWidth = originFrame.width - dx
+            let newHeight = originFrame.height - dy
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.origin.x = originFrame.minX + dx
+                frame.size.width = originFrame.width - dx
+                frame.origin.y = originFrame.minY + dy
+                frame.size.height = originFrame.height - dy
+            }
         case .topRight:
-            frame.size.width = originFrame.width + dx
-            frame.origin.y = originFrame.minY + dy
-            frame.size.height = originFrame.height - dy
+            let newWidth = originFrame.width + dx
+            let newHeight = originFrame.height - dy
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.size.width = originFrame.width + dx
+                frame.origin.y = originFrame.minY + dy
+                frame.size.height = originFrame.height - dy
+            }
         case .bottomLeft:
-            frame.origin.x = originFrame.minX + dx
-            frame.size.width = originFrame.width - dx
-            frame.size.height = originFrame.height + dy
+            let newWidth = originFrame.width - dx
+            let newHeight = originFrame.height + dy
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.origin.x = originFrame.minX + dx
+                frame.size.width = originFrame.width - dx
+                frame.size.height = originFrame.height + dy
+            }
         case .bottomRight:
-            frame.size.width = originFrame.width + dx
-            frame.size.height = originFrame.height + dy
+            let newWidth = originFrame.width + dx
+            let newHeight = originFrame.height + dy
+            if min(newWidth, newHeight) / max(newWidth, newHeight) >= 0 {
+                frame.size.width = originFrame.width + dx
+                frame.size.height = originFrame.height + dy
+            }
         default:
             break
         }
@@ -363,13 +403,13 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         }
         
         let imageSize = self.imageSize
-//        scrollView.contentSize = imageSize
+        scrollView.contentSize = imageSize
         
         let bounds = self.contentBounds
         let scale: CGFloat = min(bounds.width / imageSize.width, bounds.height / imageSize.height)
         let scaledImageSize = CGSize(width: floor(imageSize.width * scale), height: floor(imageSize.height * scale))
-        
         scrollView.minimumZoomScale = scale
+        scrollView.maximumZoomScale = scale * 4
         
         var frame = CGRect.zero
         frame.size = scaledImageSize
@@ -381,8 +421,8 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         scrollView.contentSize = scaledImageSize
         if frame.width < scaledImageSize.width - CGFloat(Float.ulpOfOne) || frame.height < scaledImageSize.height - CGFloat(Float.ulpOfOne) {
             var offset = CGPoint.zero
-            offset.x = -floor((scrollView.frame.width - scaledImageSize.width) * 0.5)
-            offset.y = -floor((scrollView.frame.height - scaledImageSize.height) * 0.5)
+            offset.x = -floor((self.frame.width - scaledImageSize.width) * 0.5)
+            offset.y = -floor((self.frame.height - allInsets.top - allInsets.bottom - scaledImageSize.height) * 0.5)
             scrollView.contentOffset = offset
         }
 
@@ -469,7 +509,6 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         let containerSize = backgroundContainerView.frame.size
         backgroundContainerView.frame = CGRect(origin: .zero, size: .init(width: containerSize.height, height: containerSize.width))
         backgroundImageView.frame = CGRect(origin: .zero, size: backgroundImageView.frame.size)
-        
         foregroundContainerView.transform = .identity
         foregroundImageView.transform = rotation
         
@@ -507,7 +546,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
             guard snapshotView != nil else {
                 return
             }
-            snapshotView!.center = CGPoint(x: scrollView.center.x - (-insets.left + insets.right) / 2, y: scrollView.center.y - (-insets.top + insets.bottom) / 2)// scrollView.center
+            snapshotView!.center = CGPoint(x: scrollView.center.x - (-allInsets.left + allInsets.right) / 2, y: scrollView.center.y - (-allInsets.top + allInsets.bottom) / 2)// scrollView.center
             self.addSubview(snapshotView!)
             
             backgroundContainerView.isHidden = true
@@ -786,18 +825,25 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
     // MARK: - Properties
     
     weak public var delegate: WTEditingCropViewDelegate?
-    public var insets: UIEdgeInsets = UIEdgeInsetsMake(0, 0, rotateButtonHeight + rotateButtonTop + rotateButtonBottom, 0)
+    public var insets: UIEdgeInsets = .zero {
+        didSet {
+            allInsets = UIEdgeInsetsMake(insets.top, insets.left, insets.bottom + rotateButtonHeight + rotateButtonTop + rotateButtonBottom, insets.right)
+        }
+    }
+    private var allInsets: UIEdgeInsets = UIEdgeInsetsMake(0, 0, rotateButtonHeight + rotateButtonTop + rotateButtonBottom, 0)
     
     lazy private var scrollView: WTEditingCropScrollView = {
-        let scrollView = WTEditingCropScrollView(frame: self.bounds)
-        scrollView.translatesAutoresizingMaskIntoConstraints = true
-        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let scrollView = WTEditingCropScrollView(frame: .zero)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         scrollView.backgroundColor = UIColor.clear
         scrollView.alwaysBounceHorizontal = true
         scrollView.alwaysBounceVertical = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.maximumZoomScale = 4
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
         scrollView.delegate = self
         scrollView.touchesBeganHandler = { [weak self] in
             self?.startEditing()
@@ -912,7 +958,6 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
     private var panOriginPoint: CGPoint = .zero
     private var cropBoxFrame: CGRect = .zero {
         didSet(newValue) {
-//            print("didSet 1:\(cropBoxFrame)")
             if newValue.equalTo(cropBoxFrame) {
                 return
             }
@@ -921,13 +966,14 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
                 return
             }
             self.foregroundContainerView.frame = cropBoxFrame
-//            print("didSet 2: + \(cropBoxFrame)")
+//            print("cropBoxFrame: + \(cropBoxFrame)")
 //            print("scrollView: + \(scrollView.frame)")
 //            print("backgroundContainerView: + \(backgroundContainerView.frame)")
 //            print("backgroundImageView: + \(backgroundImageView.frame)")
 //            print("foregroundContainerView: + \(foregroundContainerView.frame)")
 //            print("foregroundImageView: + \(foregroundImageView.frame)")
-
+//            print("scrollView info: + \(scrollView)")
+            
             self.scrollView.contentInset = UIEdgeInsetsMake(cropBoxFrame.minY, cropBoxFrame.minX, self.bounds.maxY - cropBoxFrame.maxY, self.bounds.maxX - cropBoxFrame.maxX)
             let imageSize = self.backgroundContainerView.bounds.size
             let scale = max(cropBoxFrame.height / imageSize.height, cropBoxFrame.width / imageSize.width)
@@ -987,6 +1033,16 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
             frame.size.height = ceil(cropBoxFrame.height * (imageSize.height / contentSize.height))
             frame.size.height = min(imageSize.height, frame.height)
             
+            // if frame goes beyond boundaries of the image, we move it back
+            // so it is within the boundaries.
+            if frame.origin.x + frame.width > imageSize.width {
+                frame.origin.x = imageSize.width - frame.width
+            }
+            
+            if frame.origin.y + frame.height > imageSize.height {
+                frame.origin.y = imageSize.height - frame.height
+            }
+            
             return frame
         }
         set {
@@ -1024,11 +1080,12 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
     private var simpleRenderMode: Bool = false
     
     private var contentBounds: CGRect {
+//        print(#function + " allInsets: \(allInsets) bounds: \(bounds)")
         var rect = CGRect.zero
-        rect.origin.x = insets.left + padding
-        rect.origin.y = insets.top + padding
-        rect.size.width = self.bounds.width - (padding * 2 + insets.left + insets.right)
-        rect.size.height = self.bounds.height - (padding * 2 + insets.top + insets.bottom)
+        rect.origin.x = allInsets.left + padding
+        rect.origin.y = allInsets.top + padding
+        rect.size.width = bounds.width - (padding * 2 + allInsets.left + allInsets.right)
+        rect.size.height = bounds.height - (padding * 2 + allInsets.top + allInsets.bottom)
         return rect
     }
     private var imageSize: CGSize {
@@ -1037,6 +1094,7 @@ class WTEditingCropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelega
         }
         return CGSize(width: image.size.width, height: image.size.height)
     }
+    private var completed: Bool = false
 }
 
 typealias WTEditingCropScrollViewHandler = () -> Void

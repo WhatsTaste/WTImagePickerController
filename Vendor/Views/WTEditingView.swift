@@ -46,6 +46,15 @@ class WTEditingView: UIView, WTEditingControlsViewDelegate, WTEditingCropViewDel
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func safeAreaInsetsDidChange() {
+        if #available(iOS 11.0, *) {
+            cropView.insets = safeAreaInsets
+            var bounds = cropView.bounds
+            bounds.size.height = self.bounds.height - safeAreaInsets.bottom - controlsViewHeight
+            cropView.bounds = bounds
+        }
+    }
+    
     // MARK: - WTEditingControlsViewDelegate
     
     func editingControlsViewDidCancel(_ view: WTEditingControlsView) {

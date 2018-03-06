@@ -43,7 +43,7 @@ class WTEditingViewController: UIViewController, WTEditingViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        editingView.cropView.moveCroppedContentToCenterAnimated(false)
+        editingView.cropView.layout()
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -32,6 +32,10 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -311,8 +315,9 @@ class WTAlbumDetailsViewController: UIViewController, UICollectionViewDataSource
     
     // MARK: - WTEditingViewControllerDelegate
     
-    func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset) {
-        appleResult(result, asset: asset)
+    func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset?) {
+        guard let someAsset = asset else { return }
+        appleResult(result, asset: someAsset)
     }
     
     // MARK: - Private

@@ -23,6 +23,10 @@ class WTAlbumViewController: UITableViewController, PHPhotoLibraryChangeObserver
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {

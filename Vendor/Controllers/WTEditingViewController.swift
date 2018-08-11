@@ -9,8 +9,9 @@
 import UIKit
 import Photos
 
-protocol WTEditingViewControllerDelegate: class {
-    func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset)
+@objc protocol WTEditingViewControllerDelegate: class {
+    func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset?)
+    @objc optional func editingViewControllerDidCancel(_ controller: WTEditingViewController)
 }
 
 class WTEditingViewController: UIViewController, WTEditingViewDelegate {
@@ -69,14 +70,12 @@ class WTEditingViewController: UIViewController, WTEditingViewDelegate {
     // MARK: - WTEditingViewDelegate
     
     func editingViewDidCancel(_ view: WTEditingView) {
+        delegate?.editingViewControllerDidCancel?(self)
         _ = navigationController?.popViewController(animated: true)
     }
     
     func editingView(_ view: WTEditingView, didFinishWithResult result: WTEditingResult) {
-        guard asset != nil else {
-            return
-        }
-        delegate?.editingViewController(self, didFinishWithResult: result, forAsset: asset!)
+        delegate?.editingViewController(self, didFinishWithResult: result, forAsset: asset)
         _ = navigationController?.popViewController(animated: true)
     }
     

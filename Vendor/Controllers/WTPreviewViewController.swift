@@ -32,6 +32,10 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -214,19 +218,20 @@ class WTPreviewViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // MARK: WTEditingViewControllerDelegate
     
-    func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset) {
-        editedResults[asset.localIdentifier] = result
+    func editingViewController(_ controller: WTEditingViewController, didFinishWithResult result: WTEditingResult, forAsset asset: PHAsset?) {
+        guard let someAsset = asset else { return }
+        editedResults[someAsset.localIdentifier] = result
 //        print(#function + "\(editedResult!.frame)")
         
-        if selectedIdentifiers.index(of: asset.localIdentifier) == nil {
-            selectedIdentifiers.append(asset.localIdentifier)
+        if selectedIdentifiers.index(of: someAsset.localIdentifier) == nil {
+            selectedIdentifiers.append(someAsset.localIdentifier)
         }
-        editedImages[asset.localIdentifier] = result.image
+        editedImages[someAsset.localIdentifier] = result.image
         if let indexPath = currentIndexPath() {
             updateSelections(atIndex: indexPath.item)
             collectionView.reloadItems(at: [indexPath])
         }
-        delegate?.previewViewController(self, didEditWithResult: result, forAsset: asset)
+        delegate?.previewViewController(self, didEditWithResult: result, forAsset: someAsset)
     }
     
     // MARK: WTPreviewControlsViewDelegate

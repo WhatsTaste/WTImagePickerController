@@ -32,7 +32,7 @@ class WTSelectionIndicatorView: UIControl {
             var path = UIBezierPath(arcCenter: .init(x: bounds.midX, y: bounds.midY), radius: bounds.width / 2, startAngle: -CGFloat(Double.pi / 4), endAngle: CGFloat(2 * Double.pi - Double.pi / 4), clockwise: true)
             context?.saveGState()
             let tintColor = self.tintColor!
-            let fillColor = isSelected ? tintColor : UIColor.clear
+            let fillColor = isSelected ? tintColor : tintColor.WTIPReverse(alpha: 0.5)
             let strokeColor = isSelected ? UIColor.clear : UIColor.white
             fillColor.setFill()
             path.fill()
@@ -68,12 +68,12 @@ class WTSelectionIndicatorView: UIControl {
             var path = UIBezierPath(arcCenter: arcCenter, radius: radius - 2, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
             context?.saveGState()
             let tintColor = self.tintColor!
-            let fillColor = isSelected ? tintColor : UIColor.clear
+            let fillColor = isSelected ? tintColor : tintColor.WTIPReverse(alpha: 0.5)
             fillColor.setFill()
             path.fill()
             context?.restoreGState()
             
-            let strokeColor = UIColor.white
+            let strokeColor = UIColor(white: 0, alpha: 0.2)
             path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
             path.lineWidth = 1
             strokeColor.setStroke()
@@ -88,7 +88,6 @@ class WTSelectionIndicatorView: UIControl {
     
     override var tintColor: UIColor! {
         didSet {
-//            print(#file + " [\(#line)]" + " \(#function): " + "\(tintColor)")
             setNeedsDisplay()
         }
     }

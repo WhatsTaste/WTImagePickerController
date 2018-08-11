@@ -46,7 +46,7 @@ class ViewController: UIViewController, WTImagePickerControllerDelegate {
     @IBAction func add(_ sender: Any) {
         let destinationViewController = WTImagePickerController(nibName: nil, bundle: nil)
         destinationViewController.delegate = self
-        destinationViewController.tintColor = UIColor.red
+//        destinationViewController.tintColor = UIColor.red
         destinationViewController.pickLimit = 9
         self.present(destinationViewController, animated: true, completion: nil)
     }

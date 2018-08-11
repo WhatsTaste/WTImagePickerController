@@ -24,16 +24,17 @@ class WTAlbumDetailsControlsView: UIView {
         super.init(frame: frame)
         
         // Initialization code
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        addSubview(visualEffectView)
+        backgroundColor = UIColor.clear
+        
+        addSubview(sepratorView)
         addSubview(editButton)
         addSubview(previewButton)
         addSubview(doneBadgeActionView)
         
-        addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: self, attribute: .right, relatedBy: .equal, toItem: visualEffectView, attribute: .right, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: visualEffectView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: visualEffectView, attribute: .bottom, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint.init(item: sepratorView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint.init(item: self, attribute: .right, relatedBy: .equal, toItem: sepratorView, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint.init(item: sepratorView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
+        sepratorView.addConstraint(NSLayoutConstraint.init(item: sepratorView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0.5))
         
         addConstraint(NSLayoutConstraint.init(item: editButton, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: horizontalMargin))
         addConstraint(NSLayoutConstraint.init(item: editButton, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: verticalMargin))
@@ -97,12 +98,11 @@ class WTAlbumDetailsControlsView: UIView {
     
     weak public var delegate: WTAlbumDetailsControlsViewDelegate?
     
-    lazy private var visualEffectView: UIVisualEffectView = {
-        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-        effectView.translatesAutoresizingMaskIntoConstraints = false
-        effectView.backgroundColor = UIColor.clear
-        effectView.isUserInteractionEnabled = false
-        return effectView
+    lazy private var sepratorView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        return view
     }()
     
     lazy public private(set) var editButton: UIButton = {
